@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-webpack" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>Webpack</name>
+    <description>Cordova Webpack Plugin</description>
+    <author>Kotaro Sugawara</author>
+    <keywords>cordova,webpack</keywords>
+    <license>Apache 2.0</license>
+</plugin>

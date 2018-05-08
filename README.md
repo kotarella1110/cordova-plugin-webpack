@@ -16,9 +16,48 @@ This plugin integrates [webpack](https://webpack.js.org "webpack") into your Cor
 cordova plugin add cordova-plugin-webpack
 ```
 
+You can bundle using webpack you installed.
+By default, the this plugin's webpack is used.
+
+```
+npm install webpack
+cordova plugin add cordova-plugin-webpack
+```
+
+## Usage
+
+**Just create _webpack.config.js_ file in project root!**
+
+Example:
+
+_webpack.config.js_
+
+```js
+const path = require('path');
+
+module.exports = {
+  entry: './src/entry.js',
+  output: {
+    path: path.resolve(__dirname, 'www'),
+    filename: 'bundle.js'
+  }
+};
+```
+
+Specify _www_ folder for `output.path` property.
+
+Before preparing your application, it is bundled with webpack.
+
+※ Specifically, to be bundlled before executing the following cordova commands.
+
+- `cordova prepare`
+- `cordova platform add`
+- `cordova build`
+- `cordova run`
+
 ## TODO
 
-- [ ] Bundle with webpack before preparing.
+- [x] Bundle with webpack before preparing.
 - [ ] Live Reload (Hot Module Replacement) with webpack-dev-server.
 
 ## License

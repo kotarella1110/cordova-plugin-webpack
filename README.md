@@ -48,7 +48,7 @@ Specify _www_ folder for `output.path` property.
 
 Before preparing your application, it is bundled with webpack.
 
-※ Specifically, to be bundlled before executing the following cordova commands.
+※ Specifically, to be bundled before executing the following cordova commands.
 
 - `cordova prepare`
 - `cordova platform add`

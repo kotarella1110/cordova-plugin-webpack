@@ -14,7 +14,7 @@
     "precommit": "lint-staged",
     "prepare": "npm run build",
     "build": "rimraf scripts/* && babili src --out-dir scripts",
-    "lint": "eslint 'scripts/**/*.js'"
+    "lint": "eslint 'src/**/*.js'"
   },
   "repository": {
     "type": "git",
@@ -83,7 +83,7 @@
     }
   },
   "lint-staged": {
-    "scripts/**/*.js": [
+    "src/**/*.js": [
       "npm run lint -- --fix",
       "git add"
     ]

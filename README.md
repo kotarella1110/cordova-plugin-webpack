@@ -67,3 +67,5 @@ Before preparing your application, it is bundled with webpack.
 ## Author Information
 
 This plugin was created in 2018 by Kotaro Sugawara.
+
+Please excuse my poor English.:cry:

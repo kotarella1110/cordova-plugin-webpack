@@ -35,7 +35,8 @@
   },
   "homepage": "https://github.com/kotarella1110/cordova-plugin-webpack#readme",
   "dependencies": {
-    "webpack": "^4.6.0"
+    "webpack": "^4.8.3",
+    "webpack-dev-server": "^3.1.4"
   },
   "devDependencies": {
     "babel-preset-env": "^1.6.1",

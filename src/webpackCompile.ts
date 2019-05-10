@@ -7,6 +7,7 @@ module.exports = (ctx: any) =>
       ctx.opts.projectRoot,
       'webpack.config.js',
     );
+    // eslint-disable-next-line global-require, import/no-dynamic-require
     const webpackConfig: webpack.Configuration = require(webpackConfigPath);
     const compiler = webpack(webpackConfig);
 

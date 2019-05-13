@@ -1,3 +1,4 @@
+
 <?xml version='1.0' encoding='utf-8'?>
 <plugin id="cordova-plugin-webpack" version="0.0.2" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>Webpack</name>
@@ -5,5 +6,11 @@
     <author>Kotaro Sugawara</author>
     <keywords>cordova,webpack</keywords>
     <license>Apache 2.0</license>
+    <platform name="android">
+        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+    </platform>
     <hook src="scripts/webpackCompile.js" type="before_prepare" />
+    <hook src="scripts/webpackServe.js" type="after_prepare" />
 </plugin>

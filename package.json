@@ -38,9 +38,14 @@
   },
   "homepage": "https://github.com/kotarella1110/cordova-plugin-webpack#readme",
   "dependencies": {
+    "@types/elementtree": "^0.1.0",
+    "@types/node": "^12.0.0",
     "@types/webpack": "^4.4.31",
+    "@types/webpack-dev-server": "^3.1.5",
     "cordova-common": "^3.1.0",
     "elementtree": "^0.1.7",
+    "express": "^4.16.4",
+    "glob": "^7.1.4",
     "source-map-support": "^0.5.12",
     "webpack": "^4.31.0",
     "webpack-dev-server": "^3.3.1"
@@ -48,9 +53,7 @@
   "devDependencies": {
     "@commitlint/cli": "^7.6.0",
     "@commitlint/config-conventional": "^7.6.0",
-    "@commitlint/prompt-cli": "^7.6.0",
-    "@types/elementtree": "^0.1.0",
-    "@types/node": "^12.0.0",
+    "@commitlint/prompt-cli": "^7.6.1",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",

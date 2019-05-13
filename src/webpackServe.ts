@@ -1,21 +1,25 @@
 import 'source-map-support/register';
 import * as path from 'path';
+import * as fs from 'fs';
 import * as glob from 'glob';
 import webpack from 'webpack';
+import WebpackInjectPlugin from 'webpack-inject-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import * as express from 'express';
 import CordovaConfigParser from './utils/CordovaConfigParser';
 
 module.exports = (ctx: any) =>
   new Promise(resolve => {
-    if (
-      typeof ctx.opts.options.argv === 'undefined' &&
-      !ctx.opts.options.argv.includes('--live-reload')
-    ) {
+    const platforms = ['android', 'ios'];
+    const argv = ['--livereload', '-l'];
+
+    if (!platforms.some(platform => ctx.opts.platforms.includes(platform))) {
+      return;
+    }
+    if (!argv.some(val => ctx.opts.options.argv.includes(val))) {
       return;
     }
 
-    const platforms = ['android', 'ios'];
     platforms.forEach(platform => {
       glob
         .sync(
@@ -49,6 +53,23 @@ module.exports = (ctx: any) =>
       ...webpackConfig.plugins,
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin(),
+    ];
+
+    // Inject scripts
+    webpackConfig.plugins = [
+      ...webpackConfig.plugins,
+      new WebpackInjectPlugin(() =>
+        fs.readFileSync(
+          path.resolve(__dirname, '../scripts/www/injectCSP.js'),
+          'utf8',
+        ),
+      ),
+      new WebpackInjectPlugin(() =>
+        fs.readFileSync(
+          path.resolve(__dirname, '../scripts/www/injectCordovaScript.js'),
+          'utf8',
+        ),
+      ),
     ];
 
     const platformWwwPaths = {

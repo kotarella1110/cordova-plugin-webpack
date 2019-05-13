@@ -14,7 +14,7 @@
     "upgrade-interactive": "npm-check --update",
     "precommit": "lint-staged",
     "prepare": "npm run build",
-    "build": "rimraf scripts/* && tsc",
+    "build": "rimraf scripts/* && tsc && webpack",
     "lint": "eslint '**/*.{js,ts}'",
     "lint:fix": "npm run lint -- --fix",
     "commit": "commit"
@@ -43,12 +43,15 @@
     "@types/webpack": "^4.4.31",
     "@types/webpack-dev-server": "^3.1.5",
     "cordova-common": "^3.1.0",
+    "csp-parse": "0.0.2",
+    "current-device": "^0.8.0",
     "elementtree": "^0.1.7",
     "express": "^4.16.4",
     "glob": "^7.1.4",
     "source-map-support": "^0.5.12",
     "webpack": "^4.31.0",
-    "webpack-dev-server": "^3.3.1"
+    "webpack-dev-server": "^3.3.1",
+    "webpack-inject-plugin": "^1.5.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.6.0",
@@ -65,7 +68,9 @@
     "npm-check": "^5.9.0",
     "prettier": "^1.17.0",
     "rimraf": "^2.6.3",
-    "typescript": "^3.4.5"
+    "ts-loader": "^6.0.0",
+    "typescript": "^3.4.5",
+    "webpack-cli": "^3.3.2"
   },
   "husky": {
     "hooks": {

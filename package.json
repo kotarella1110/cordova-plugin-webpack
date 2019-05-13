@@ -6,8 +6,7 @@
     "id": "cordova-plugin-webpack",
     "platforms": [
       "android",
-      "ios",
-      "browser"
+      "ios"
     ]
   },
   "scripts": {
@@ -28,8 +27,7 @@
     "webpack",
     "ecosystem:cordova",
     "cordova-android",
-    "cordova-ios",
-    "cordova-browser"
+    "cordova-ios"
   ],
   "author": "Kotaro Sugawara",
   "license": "Apache-2.0",

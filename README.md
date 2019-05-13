@@ -12,53 +12,93 @@ This plugin integrates [webpack](https://webpack.js.org "webpack") into your Cor
 
 ## Installation
 
-```
-cordova plugin add cordova-plugin-webpack
-```
-
-You can bundle using webpack you installed.
-By default, the this plugin's webpack is used.
-
-```
-npm install webpack
+```shell
 cordova plugin add cordova-plugin-webpack
 ```
 
 ## Usage
 
-**Just create _webpack.config.js_ file in project root!**
+### Create the App
 
-Example:
+```shell
+$ cordova create cordova-plugin-webpack-example cordova.plugin.webpack.example CordovaPluginWebpackExample
+$ cd cordova-plugin-webpack-example
+```
 
-_webpack.config.js_
+### Add Platforms
+
+```shell
+$ cordova platform add android ios
+```
+
+### Add Plugin
+
+```shell
+$ cordova plugin add cordova-plugin-webpack
+```
+
+### Create webpack configuration file
+
+**Just create a `webpack.config.js` file in the project root folder!**
+
+`webpack.config.js`:
 
 ```js
 const path = require('path');
 
 module.exports = {
-  entry: './src/entry.js',
+  mode: 'development'
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'www'),
-    filename: 'bundle.js'
-  }
+    filename: 'index.bundle.js'
+  },
+  devtool: 'inline-source-map',
 };
 ```
 
 Specify _www_ folder for `output.path` property.
 
+### Fix HTML file
+
+`www/index.html`:
+
+```diff
+# 
+-         <script type="text/javascript" src="js/index.js"></script>
++         <script type="text/javascript" src="index.bundle.js"></script>
+```
+
+### Build the App
+
 Before preparing your application, it is bundled with webpack.
 
-※ Specifically, to be bundled before executing the following cordova commands.
+```
+$ cordova build
+```
 
-- `cordova prepare`
-- `cordova platform add`
-- `cordova build`
-- `cordova run`
+Processing flow:
+
+`webpack compile` > `cordova prepare` > `cordova compile`
+
+### Live Reload (Hot Module Replacement) the App
+
+```
+$ cordova prepare -- --livereload
+$ cordova build -- --livereload
+$ cordova run -- --livereload
+```
+
+Processing flow:
+
+`webpack compile` > `cordova prepare` > `webpack serve` > `cordova compile`
 
 ## TODO
 
 - [x] Bundle with webpack before preparing.
-- [ ] Live Reload (Hot Module Replacement) with webpack-dev-server.
+- [x] Live Reload (Hot Module Replacement) with webpack-dev-server.
+    - [x] Emulator
+    - [ ] Device
 
 ## License
 
@@ -67,5 +107,3 @@ Before preparing your application, it is bundled with webpack.
 ## Author Information
 
 This plugin was created in 2018 by Kotaro Sugawara.
-
-Please excuse my poor English.:cry:

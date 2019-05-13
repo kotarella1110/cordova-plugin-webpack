@@ -11,10 +11,13 @@
     ]
   },
   "scripts": {
+    "upgrade-interactive": "npm-check --update",
     "precommit": "lint-staged",
     "prepare": "npm run build",
-    "build": "rimraf scripts/* && babili src --out-dir scripts",
-    "lint": "eslint 'src/**/*.js'"
+    "build": "rimraf scripts/* && tsc && webpack",
+    "lint": "eslint '**/*.{js,ts}'",
+    "lint:fix": "npm run lint -- --fix",
+    "commit": "commit"
   },
   "repository": {
     "type": "git",
@@ -35,56 +38,56 @@
   },
   "homepage": "https://github.com/kotarella1110/cordova-plugin-webpack#readme",
   "dependencies": {
-    "webpack": "^4.8.3",
-    "webpack-dev-server": "^3.1.4"
+    "@types/elementtree": "^0.1.0",
+    "@types/node": "^12.0.0",
+    "@types/webpack": "^4.4.31",
+    "@types/webpack-dev-server": "^3.1.5",
+    "cordova-common": "^3.1.0",
+    "csp-parse": "0.0.2",
+    "current-device": "^0.8.0",
+    "elementtree": "^0.1.7",
+    "express": "^4.16.4",
+    "glob": "^7.1.4",
+    "source-map-support": "^0.5.12",
+    "webpack": "^4.31.0",
+    "webpack-dev-server": "^3.3.1",
+    "webpack-inject-plugin": "^1.5.0"
   },
   "devDependencies": {
-    "babel-preset-env": "^1.6.1",
-    "babili": "^0.1.4",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
+    "@commitlint/cli": "^7.6.0",
+    "@commitlint/config-conventional": "^7.6.0",
+    "@commitlint/prompt-cli": "^7.6.1",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.0.5",
-    "prettier": "^1.12.1",
-    "rimraf": "^2.6.2"
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-prettier": "^3.0.1",
+    "husky": "^2.2.0",
+    "lint-staged": "^8.1.6",
+    "npm-check": "^5.9.0",
+    "prettier": "^1.17.0",
+    "rimraf": "^2.6.3",
+    "ts-loader": "^6.0.0",
+    "typescript": "^3.4.5",
+    "webpack-cli": "^3.3.2"
   },
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": "4.2.0"
-          }
-        }
-      ]
-    ]
-  },
-  "eslintConfig": {
-    "extends": [
-      "airbnb-base",
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "singleQuote": true,
-          "trailingComma": "es5"
-        }
-      ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
-    "src/**/*.js": [
-      "npm run lint -- --fix",
-      "git add"
+    "linters": {
+      "*.{js,ts}": [
+        "npm run lint:fix",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "node_modules/**",
+      "scripts/**"
     ]
   }
 }

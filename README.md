@@ -64,7 +64,6 @@ Specify _www_ folder for `output.path` property.
 `www/index.html`:
 
 ```diff
-# 
 -         <script type="text/javascript" src="js/index.js"></script>
 +         <script type="text/javascript" src="index.bundle.js"></script>
 ```

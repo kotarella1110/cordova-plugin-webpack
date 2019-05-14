@@ -37,6 +37,7 @@
   "homepage": "https://github.com/kotarella1110/cordova-plugin-webpack#readme",
   "dependencies": {
     "@types/elementtree": "^0.1.0",
+    "@types/ip": "^1.1.0",
     "@types/node": "^12.0.0",
     "@types/react-dev-utils": "^9.0.1",
     "@types/webpack": "^4.4.31",
@@ -47,6 +48,7 @@
     "elementtree": "^0.1.7",
     "express": "^4.16.4",
     "glob": "^7.1.4",
+    "ip": "^1.1.5",
     "react-dev-utils": "^9.0.1",
     "source-map-support": "^0.5.12",
     "webpack": "^4.31.0",

@@ -151,7 +151,7 @@ module.exports = {
 - [x] Bundle with webpack before preparing.
 - [x] Live Reload (Hot Module Replacement) with webpack-dev-server.
     - [x] Emulator
-    - [ ] Device
+    - [x] Device
 
 ## License
 

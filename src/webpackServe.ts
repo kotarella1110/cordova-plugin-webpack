@@ -2,6 +2,7 @@ import 'source-map-support/register';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as glob from 'glob';
+import * as ip from 'ip';
 import webpack from 'webpack';
 import WebpackInjectPlugin from 'webpack-inject-plugin';
 import WebpackDevServer from 'webpack-dev-server';
@@ -24,6 +25,10 @@ module.exports = (ctx: any) =>
     try {
       const defaultHost = '0.0.0.0';
       const defaultPort = 8080;
+      const defaultAccessHosts = {
+        android: '10.0.2.2',
+        ios: 'localhost',
+      };
 
       const port = await choosePort(defaultHost, defaultPort);
       if (!port) {
@@ -44,7 +49,9 @@ module.exports = (ctx: any) =>
             const configXml = new CordovaConfigParser(configXmlPath);
             configXml.setContent(
               `http://${
-                platform === 'android' ? '10.0.2.2' : 'localhost'
+                platform === 'android'
+                  ? ip.address() || defaultAccessHosts.android
+                  : ip.address() || defaultAccessHosts.ios
               }:${port}`,
             );
             if (platform === 'ios')

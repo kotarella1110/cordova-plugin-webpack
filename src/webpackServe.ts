@@ -9,7 +9,7 @@ import * as express from 'express';
 import CordovaConfigParser from './utils/CordovaConfigParser';
 
 module.exports = (ctx: any) =>
-  new Promise(resolve => {
+  new Promise((resolve, reject) => {
     const platforms = ['android', 'ios'];
     const argv = ['--livereload', '-l'];
 
@@ -96,7 +96,11 @@ module.exports = (ctx: any) =>
 
     const compiler = webpack(webpackConfig);
     const server = new WebpackDevServer(compiler, devServerConfig);
-    server.listen(8080, '0.0.0.0', () => {
+    server.listen(8080, '0.0.0.0', err => {
+      if (err) {
+        reject(err);
+      }
+
       console.log('dev server listening on port 8080');
       resolve();
     });

@@ -46,15 +46,10 @@ module.exports = (ctx: any) =>
     );
     // eslint-disable-next-line global-require, import/no-dynamic-require
     const webpackConfig: webpack.Configuration = require(webpackConfigPath);
+
+    webpackConfig.mode = 'development';
+
     webpackConfig.plugins = webpackConfig.plugins || [];
-
-    // HMR
-    webpackConfig.plugins = [
-      ...webpackConfig.plugins,
-      new webpack.NamedModulesPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-    ];
-
     // Inject scripts
     webpackConfig.plugins = [
       ...webpackConfig.plugins,

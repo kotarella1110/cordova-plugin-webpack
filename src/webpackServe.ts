@@ -6,10 +6,11 @@ import webpack from 'webpack';
 import WebpackInjectPlugin from 'webpack-inject-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import * as express from 'express';
+import { choosePort } from 'react-dev-utils/WebpackDevServerUtils';
 import CordovaConfigParser from './utils/CordovaConfigParser';
 
 module.exports = (ctx: any) =>
-  new Promise((resolve, reject) => {
+  new Promise(async (resolve, reject) => {
     const platforms = ['android', 'ios'];
     const argv = ['--livereload', '-l'];
 
@@ -94,14 +95,27 @@ module.exports = (ctx: any) =>
     // HMR
     WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerConfig);
 
-    const compiler = webpack(webpackConfig);
-    const server = new WebpackDevServer(compiler, devServerConfig);
-    server.listen(8080, '0.0.0.0', err => {
-      if (err) {
-        reject(err);
+    try {
+      const port = await choosePort('0.0.0.0', 8080);
+      if (!port) {
+        resolve();
+        return;
       }
-
-      console.log('dev server listening on port 8080');
-      resolve();
-    });
+      const compiler = webpack(webpackConfig);
+      const server = new WebpackDevServer(compiler, devServerConfig);
+      server.listen(port, '0.0.0.0', err => {
+        if (err && err.message) {
+          console.log(err.message);
+          reject();
+          return;
+        }
+        console.log('Starting the development server...\n');
+        resolve();
+      });
+    } catch (err) {
+      if (err && err.message) {
+        console.log(err.message);
+        reject();
+      }
+    }
   });

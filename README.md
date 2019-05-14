@@ -37,6 +37,13 @@ $ cordova platform add android ios
 $ cordova plugin add cordova-plugin-webpack
 ```
 
+### Create JavaScript file you want to bundle
+
+```shell
+$ mkdir src
+$ cp www/js/index.js src/index.js
+```
+
 ### Create webpack configuration file
 
 **Just create a `webpack.config.js` file in the project root folder!**
@@ -57,9 +64,7 @@ module.exports = {
 };
 ```
 
-Specify _www_ folder for `output.path` property.
-
-### Fix HTML file
+### Fix the HTML file
 
 `www/index.html`:
 
@@ -85,12 +90,61 @@ Processing flow:
 ```
 $ cordova prepare -- --livereload
 $ cordova build -- --livereload
-$ cordova run -- --livereload
+$ cordova run -- -l
 ```
 
 Processing flow:
 
 `webpack compile` > `cordova prepare` > `webpack serve` > `cordova compile`
+
+### Customize webpack configuration
+
+#### Build
+
+If you want to customize `webpack` options, modify `webpack.config.js` file as follows:
+
+```js
+...
+module.exports = {
+  ...
+  mode: 'production'
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'www'),
+    filename: 'bundle.js'
+  },
+  plugins: [
+    new HtmlWebpackPlugin()
+  ]
+  ...
+}
+```
+
+#### Live Reload (Hot Module Replacement)
+
+By defaults:
+
+| option | default |
+|--------|---------|
+| `devServer.contentBase`  | `www` |
+| `devServer.historyApiFallBack` | `true` |
+| `devServer.host` | `0.0.0.0` |
+| `devServer.port` | `8080` |
+
+
+If you want to customize `devServer` options, modify `webpack.config.js` file as follows:
+
+```
+...
+module.exports = {
+  ...
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
+    host: 'localhost',
+    port: '8000',
+  },
+};
+```
 
 ## TODO
 

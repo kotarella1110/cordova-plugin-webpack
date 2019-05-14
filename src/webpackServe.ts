@@ -46,27 +46,26 @@ module.exports = (ctx: any) =>
       'webpack.config.js',
     );
     // eslint-disable-next-line global-require, import/no-dynamic-require
-    const webpackConfig: webpack.Configuration = require(webpackConfigPath);
-
-    webpackConfig.mode = 'development';
-
-    webpackConfig.plugins = webpackConfig.plugins || [];
-    // Inject scripts
-    webpackConfig.plugins = [
-      ...webpackConfig.plugins,
-      new WebpackInjectPlugin(() =>
-        fs.readFileSync(
-          path.resolve(__dirname, '../scripts/www/injectCSP.js'),
-          'utf8',
+    const customWebpackConfig: webpack.Configuration = require(webpackConfigPath);
+    const webpackConfig: webpack.Configuration = {
+      ...customWebpackConfig,
+      mode: 'development',
+      plugins: [
+        ...(customWebpackConfig.plugins || []),
+        new WebpackInjectPlugin(() =>
+          fs.readFileSync(
+            path.resolve(__dirname, '../scripts/www/injectCSP.js'),
+            'utf8',
+          ),
         ),
-      ),
-      new WebpackInjectPlugin(() =>
-        fs.readFileSync(
-          path.resolve(__dirname, '../scripts/www/injectCordovaScript.js'),
-          'utf8',
+        new WebpackInjectPlugin(() =>
+          fs.readFileSync(
+            path.resolve(__dirname, '../scripts/www/injectCordovaScript.js'),
+            'utf8',
+          ),
         ),
-      ),
-    ];
+      ],
+    };
 
     const platformWwwPaths = {
       android: path.join(
@@ -76,20 +75,24 @@ module.exports = (ctx: any) =>
       ios: path.join(ctx.opts.projectRoot, 'platforms/ios/platform_www'),
     };
 
+    const customDevServerConfig: WebpackDevServer.Configuration =
+      webpackConfig.devServer || {};
     const devServerConfig: WebpackDevServer.Configuration = {
-      before: app => {
+      contentBase: path.join(ctx.opts.projectRoot, 'www'),
+      historyApiFallback: true,
+      host: '0.0.0.0',
+      port: 8080,
+      ...customDevServerConfig,
+      hot: true,
+      before: (app, server) => {
+        if (customDevServerConfig.before)
+          customDevServerConfig.before(app, server);
         (Object.keys(platformWwwPaths) as Array<
           keyof typeof platformWwwPaths
         >).forEach(platform => {
           app.use(`/${platform}`, express.static(platformWwwPaths[platform]));
         });
       },
-      contentBase: path.join(ctx.opts.projectRoot, 'www'),
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      host: '0.0.0.0',
-      port: 8080,
     };
 
     // HMR

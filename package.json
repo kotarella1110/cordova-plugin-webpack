@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-webpack",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Cordova Webpack Plugin",
   "cordova": {
     "id": "cordova-plugin-webpack",

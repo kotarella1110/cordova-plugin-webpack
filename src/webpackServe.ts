@@ -21,100 +21,110 @@ module.exports = (ctx: any) =>
       return;
     }
 
-    platforms.forEach(platform => {
-      glob
-        .sync(
-          `${path.join(
-            ctx.opts.projectRoot,
-            'platforms',
-            platform,
-          )}/**/*/config.xml`,
-        )
-        .forEach(configXmlPath => {
-          const configXml = new CordovaConfigParser(configXmlPath);
-          configXml.setContent(
-            `http://${platform === 'android' ? '10.0.2.2' : 'localhost'}:8080`,
-          );
-          if (platform === 'ios')
-            configXml.setElement('allow-navigation', { href: '*' });
-          configXml.write();
-        });
-    });
-
-    const webpackConfigPath = path.join(
-      ctx.opts.projectRoot,
-      'webpack.config.js',
-    );
-    // eslint-disable-next-line global-require, import/no-dynamic-require
-    const customWebpackConfig: webpack.Configuration = require(webpackConfigPath);
-    const webpackConfig: webpack.Configuration = {
-      ...customWebpackConfig,
-      mode: 'development',
-      plugins: [
-        ...(customWebpackConfig.plugins || []),
-        new WebpackInjectPlugin(() =>
-          fs.readFileSync(
-            path.resolve(__dirname, '../scripts/www/injectCSP.js'),
-            'utf8',
-          ),
-        ),
-        new WebpackInjectPlugin(() =>
-          fs.readFileSync(
-            path.resolve(__dirname, '../scripts/www/injectCordovaScript.js'),
-            'utf8',
-          ),
-        ),
-      ],
-    };
-
-    const platformWwwPaths = {
-      android: path.join(
-        ctx.opts.projectRoot,
-        'platforms/android/platform_www',
-      ),
-      ios: path.join(ctx.opts.projectRoot, 'platforms/ios/platform_www'),
-    };
-
-    const customDevServerConfig: WebpackDevServer.Configuration =
-      webpackConfig.devServer || {};
-    const devServerConfig: WebpackDevServer.Configuration = {
-      contentBase: path.join(ctx.opts.projectRoot, 'www'),
-      historyApiFallback: true,
-      host: '0.0.0.0',
-      port: 8080,
-      ...customDevServerConfig,
-      hot: true,
-      before: (app, server) => {
-        if (customDevServerConfig.before)
-          customDevServerConfig.before(app, server);
-        (Object.keys(platformWwwPaths) as Array<
-          keyof typeof platformWwwPaths
-        >).forEach(platform => {
-          app.use(`/${platform}`, express.static(platformWwwPaths[platform]));
-        });
-      },
-    };
-
-    // HMR
-    WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerConfig);
-
     try {
-      const port = await choosePort('0.0.0.0', 8080);
+      const defaultHost = '0.0.0.0';
+      const defaultPort = 8080;
+
+      const port = await choosePort(defaultHost, defaultPort);
       if (!port) {
         resolve();
         return;
       }
+
+      platforms.forEach(platform => {
+        glob
+          .sync(
+            `${path.join(
+              ctx.opts.projectRoot,
+              'platforms',
+              platform,
+            )}/**/*/config.xml`,
+          )
+          .forEach(configXmlPath => {
+            const configXml = new CordovaConfigParser(configXmlPath);
+            configXml.setContent(
+              `http://${
+                platform === 'android' ? '10.0.2.2' : 'localhost'
+              }:${port}`,
+            );
+            if (platform === 'ios')
+              configXml.setElement('allow-navigation', { href: '*' });
+            configXml.write();
+          });
+      });
+
+      const webpackConfigPath = path.join(
+        ctx.opts.projectRoot,
+        'webpack.config.js',
+      );
+      // eslint-disable-next-line global-require, import/no-dynamic-require
+      const customWebpackConfig: webpack.Configuration = require(webpackConfigPath);
+      const webpackConfig: webpack.Configuration = {
+        ...customWebpackConfig,
+        mode: 'development',
+        plugins: [
+          ...(customWebpackConfig.plugins || []),
+          new WebpackInjectPlugin(() =>
+            fs.readFileSync(
+              path.resolve(__dirname, '../scripts/www/injectCSP.js'),
+              'utf8',
+            ),
+          ),
+          new WebpackInjectPlugin(() =>
+            fs.readFileSync(
+              path.resolve(__dirname, '../scripts/www/injectCordovaScript.js'),
+              'utf8',
+            ),
+          ),
+        ],
+      };
+
+      const platformWwwPaths = {
+        android: path.join(
+          ctx.opts.projectRoot,
+          'platforms/android/platform_www',
+        ),
+        ios: path.join(ctx.opts.projectRoot, 'platforms/ios/platform_www'),
+      };
+
+      const customDevServerConfig: WebpackDevServer.Configuration =
+        webpackConfig.devServer || {};
+      const devServerConfig: WebpackDevServer.Configuration = {
+        contentBase: path.join(ctx.opts.projectRoot, 'www'),
+        historyApiFallback: true,
+        host: defaultHost,
+        port,
+        ...customDevServerConfig,
+        hot: true,
+        before: (app, server) => {
+          if (customDevServerConfig.before)
+            customDevServerConfig.before(app, server);
+          (Object.keys(platformWwwPaths) as Array<
+            keyof typeof platformWwwPaths
+          >).forEach(platform => {
+            app.use(`/${platform}`, express.static(platformWwwPaths[platform]));
+          });
+        },
+      };
+
+      // HMR
+      WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerConfig);
+
       const compiler = webpack(webpackConfig);
       const server = new WebpackDevServer(compiler, devServerConfig);
-      server.listen(port, '0.0.0.0', err => {
-        if (err && err.message) {
-          console.log(err.message);
-          reject();
-          return;
-        }
-        console.log('Starting the development server...\n');
-        resolve();
-      });
+      server.listen(
+        devServerConfig.port || defaultPort,
+        devServerConfig.host || defaultHost,
+        err => {
+          if (err && err.message) {
+            console.log(err.message);
+            reject();
+            return;
+          }
+          console.log('Starting the development server...\n');
+          resolve();
+        },
+      );
     } catch (err) {
       if (err && err.message) {
         console.log(err.message);

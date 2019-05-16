@@ -13,7 +13,7 @@ This plugin integrates [webpack](https://webpack.js.org "webpack") into your Cor
 ## Installation
 
 ```shell
-cordova plugin add cordova-plugin-webpack
+$ cordova plugin add cordova-plugin-webpack
 ```
 
 ## Usage

@@ -77,7 +77,7 @@ module.exports = {
 
 Before preparing your application, it is bundled with webpack.
 
-```
+```shell
 $ cordova build
 ```
 
@@ -87,7 +87,7 @@ Processing flow:
 
 ### Live Reload (Hot Module Replacement) the App
 
-```
+```shell
 $ cordova prepare -- --livereload
 $ cordova build -- --livereload
 $ cordova run -- -l
@@ -95,7 +95,7 @@ $ cordova run -- -l
 
 Processing flow:
 
-`webpack compile` > `cordova prepare` > `webpack serve` > `cordova compile`
+`cordova prepare` > `webpack serve` > `cordova compile`
 
 ### Customize webpack configuration
 
@@ -135,7 +135,7 @@ By defaults:
 
 If you want to customize `devServer` options, modify `webpack.config.js` file as follows:
 
-```
+```js
 ...
 module.exports = {
   ...
@@ -144,13 +144,25 @@ module.exports = {
     host: 'localhost',
     port: '8000',
   },
+  ...
 };
+```
+
+## CLI examples
+
+```shell
+$ cordova prepare # webpack compile
+$ cordova prepare -- --livereload # webpack live reload
+$ cordova build # webpack compile
+$ cordova build -- --webpackConfig path/to/dir/webpack.config.babel.js # webpack compile
+$ cordova build -- --w path/to/dir/webpack.config.js --livereload # webpack live reload
+$ cordova run -- --w path/to/dir/webpack.config.j -l # webpack live reload 
 ```
 
 ## TODO
 
 - [x] Bundle with webpack before preparing.
-- [x] Live Reload (Hot Module Replacement) with webpack-dev-server.
+- [x] Live Reload (Hot Module Replacement) with webpack-dev-server after preparing.
     - [x] Emulator
     - [x] Device
 

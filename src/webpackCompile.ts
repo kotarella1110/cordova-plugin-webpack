@@ -1,19 +1,34 @@
 import 'source-map-support/register';
+import argvParse from 'yargs-parser';
 import webpack from 'webpack';
 import * as webpackHelper from './utils/webpackHelper';
 
 module.exports = (ctx: any) =>
   new Promise((resolve, reject) => {
+    const platforms = ['browser', 'android', 'ios'];
+    if (!platforms.some(platform => ctx.opts.platforms.includes(platform))) {
+      resolve();
+      return;
+    }
+
+    const argv = argvParse(ctx.opts.options.argv.join(' '));
+    if (argv.livereload || argv.l) {
+      resolve();
+      return;
+    }
+
     const customWebpackConfig: webpack.Configuration = webpackHelper.webpackConfig(
-      webpackHelper.webpackConfigPath(ctx.opts.projectRoot),
+      ctx.opts.projectRoot,
+      argv.webpackConfig || argv.w,
     );
     const compiler = webpack(customWebpackConfig);
 
     compiler.run((err, stats) => {
-      if (err) {
-        reject(err);
+      if (err && err.message) {
+        console.log(err.message);
+        reject();
+        return;
       }
-
       console.log(
         stats.toString({
           chunks: false,

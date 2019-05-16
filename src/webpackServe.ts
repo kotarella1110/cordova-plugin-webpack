@@ -99,6 +99,7 @@ module.exports = (ctx: any) =>
         historyApiFallback: true,
         host: defaultHost,
         port,
+        watchContentBase: true,
         ...customDevServerConfig,
         hot: true,
         before: (app, server) => {

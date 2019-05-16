@@ -1,16 +1,13 @@
 import 'source-map-support/register';
-import * as path from 'path';
 import webpack from 'webpack';
+import * as webpackHelper from './utils/webpackHelper';
 
 module.exports = (ctx: any) =>
   new Promise((resolve, reject) => {
-    const webpackConfigPath = path.resolve(
-      ctx.opts.projectRoot,
-      'webpack.config.js',
+    const customWebpackConfig: webpack.Configuration = webpackHelper.webpackConfig(
+      webpackHelper.webpackConfigPath(ctx.opts.projectRoot),
     );
-    // eslint-disable-next-line global-require, import/no-dynamic-require
-    const webpackConfig: webpack.Configuration = require(webpackConfigPath);
-    const compiler = webpack(webpackConfig);
+    const compiler = webpack(customWebpackConfig);
 
     compiler.run((err, stats) => {
       if (err) {

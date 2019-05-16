@@ -8,6 +8,7 @@ import WebpackInjectPlugin from 'webpack-inject-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import * as express from 'express';
 import { choosePort } from 'react-dev-utils/WebpackDevServerUtils';
+import * as webpackHelper from './utils/webpackHelper';
 import CordovaConfigParser from './utils/CordovaConfigParser';
 
 module.exports = (ctx: any) =>
@@ -60,12 +61,9 @@ module.exports = (ctx: any) =>
           });
       });
 
-      const webpackConfigPath = path.join(
-        ctx.opts.projectRoot,
-        'webpack.config.js',
+      const customWebpackConfig: webpack.Configuration = webpackHelper.webpackConfig(
+        webpackHelper.webpackConfigPath(ctx.opts.projectRoot),
       );
-      // eslint-disable-next-line global-require, import/no-dynamic-require
-      const customWebpackConfig: webpack.Configuration = require(webpackConfigPath);
       const webpackConfig: webpack.Configuration = {
         ...customWebpackConfig,
         mode: 'development',

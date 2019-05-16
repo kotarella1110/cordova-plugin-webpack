@@ -54,11 +54,11 @@ $ cp www/js/index.js src/index.js
 const path = require('path');
 
 module.exports = {
-  mode: 'development'
+  mode: 'development',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'www'),
-    filename: 'index.bundle.js'
+    filename: 'index.bundle.js',
   },
   devtool: 'inline-source-map',
 };
@@ -107,15 +107,15 @@ If you want to customize `webpack` options, modify `webpack.config.js` file as f
 ...
 module.exports = {
   ...
-  mode: 'production'
+  mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'www'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   plugins: [
-    new HtmlWebpackPlugin()
-  ]
+    new HtmlWebpackPlugin(),
+  ],
   ...
 }
 ```

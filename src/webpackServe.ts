@@ -103,8 +103,8 @@ module.exports = (ctx: any) =>
       host: defaultHost,
       port,
       watchContentBase: true,
-      ...customDevServerConfig,
       hot: true,
+      ...customDevServerConfig,
       before: (app, server) => {
         if (customDevServerConfig.before)
           customDevServerConfig.before(app, server);

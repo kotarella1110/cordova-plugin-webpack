@@ -131,7 +131,7 @@ By defaults:
 | `devServer.host` | `0.0.0.0` |
 | `devServer.port` | `8080` |
 | `devServer.watchContentBase` | `true` |
-
+| `devServer.hot` | `true` |
 
 If you want to customize `devServer` options, modify `webpack.config.js` file as follows:
 

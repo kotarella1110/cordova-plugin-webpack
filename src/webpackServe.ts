@@ -103,8 +103,8 @@ module.exports = (ctx: any) =>
       host: defaultHost,
       port,
       watchContentBase: true,
-      ...customDevServerConfig,
       hot: true,
+      ...customDevServerConfig,
       before: (app, server) => {
         if (customDevServerConfig.before)
           customDevServerConfig.before(app, server);
@@ -117,7 +117,7 @@ module.exports = (ctx: any) =>
     };
 
     // HMR
-    WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerConfig);
+    if(devServerConfig.hot) WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerConfig);
 
     const compiler = webpack(webpackConfig);
     const server = new WebpackDevServer(compiler, devServerConfig);

@@ -1,6 +1,6 @@
 
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-webpack" version="0.0.2" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-webpack" version="0.3.2" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>Webpack</name>
     <description>Cordova Webpack Plugin</description>
     <author>Kotaro Sugawara</author>

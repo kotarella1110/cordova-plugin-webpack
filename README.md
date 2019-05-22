@@ -156,7 +156,7 @@ $ cordova prepare -- --livereload # webpack live reload
 $ cordova build # webpack compile
 $ cordova build -- --webpackConfig path/to/dir/webpack.config.babel.js # webpack compile
 $ cordova build -- --w path/to/dir/webpack.config.js --livereload # webpack live reload
-$ cordova run -- --w path/to/dir/webpack.config.j -l # webpack live reload 
+$ cordova run -- --w path/to/dir/webpack.config.js -l # webpack live reload 
 ```
 
 ## TODO

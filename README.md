@@ -10,98 +10,146 @@
 
 This plugin integrates [webpack](https://webpack.js.org "webpack") into your Cordova workflow.
 
+## Motivation
+
+Module bundlers such as webpack are essential for SPA (Single Page Application) development. Unfortunately, the Cordova workflow does not integrate webpack as a standard feature.
+This plugin makes webpack easy to integrate into Cordova workflow.
+
+## Features
+
+* Simply install this plugin and create a webpack configuration file in your project root folder to easily integrate integrate webpack into your Cordova workflow
+* Modifications made to HTML/CSS/JS in the source code results in an instant Cordova WebView update by LiveReloaad ([Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement "Hot Module Replacement | webpack"))
+* Supports devices and emulators for Android and iOS platforms
+
 ## Installation
 
 ```shell
 $ cordova plugin add cordova-plugin-webpack
 ```
 
-## Usage
+## CLI Reference
 
-### Create the App
-
-```shell
-$ cordova create cordova-plugin-webpack-example cordova.plugin.webpack.example CordovaPluginWebpackExample
-$ cd cordova-plugin-webpack-example
-```
-
-### Add Platforms
+### Syntax
 
 ```shell
-$ cordova platform add android ios
+$ cordova { prepare | platform add | build | run } [<platform> [...]]
+    [-- [--webpackConfig <webpackConfig> | --livereload]]
 ```
 
-### Add Plugin
+| Option | Description | Default | Aliases |
+|--------|-------------|---------|---------|
+| `--webpackConfig` | Path to a webpack configuration file | `webpack.config.js` or `webpackfile.js` in your project root directory. | `-w` |
+| `--livereload` | Enables LiveReload (HMR) | `false` | `-l` |
 
-```shell
-$ cordova plugin add cordova-plugin-webpack
-```
-
-### Create JavaScript file you want to bundle
-
-```shell
-$ mkdir src
-$ cp www/js/index.js src/index.js
-```
-
-### Create webpack configuration file
-
-**Just create a `webpack.config.js` file in the project root folder!**
-
-`webpack.config.js`:
-
-```js
-const path = require('path');
-
-module.exports = {
-  mode: 'development',
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'www'),
-    filename: 'index.bundle.js',
-  },
-  devtool: 'inline-source-map',
-};
-```
-
-### Fix the HTML file
-
-`www/index.html`:
-
-```diff
--         <script type="text/javascript" src="js/index.js"></script>
-+         <script type="text/javascript" src="index.bundle.js"></script>
-```
-
-### Build the App
-
-Before preparing your application, it is bundled with webpack.
-
-```shell
-$ cordova build
-```
-
-Processing flow:
-
-`webpack compile` > `cordova prepare` > `cordova compile`
-
-### Live Reload (Hot Module Replacement) the App
-
-```shell
-$ cordova prepare -- --livereload
-$ cordova build -- --livereload
-$ cordova run -- -l
-```
-
-Processing flow:
-
-`cordova prepare` > `webpack serve` > `cordova compile`
-
-### Customize webpack configuration
+### Examples
 
 #### Build
 
-If you want to customize `webpack` options, modify `webpack.config.js` file as follows:
+To be compiled by webpack **before preparing** your Cordova app.
+
+```shell
+$ cordova prepare
+$ cordova build -- --webpackConfig path/to/dir/webpack.config.js
+```
+
+#### Live Reload (HMR)
+
+To be ran by Webpack Dev Server **after preparing** your Cordova app.
+
+```shell
+$ cordova prepare -- --livereload
+$ cordova run -- -w path/to/dir/webpack.config.babel.js -l
+```
+
+## Usage
+
+1. [Add this plugin](#Installation)
+
+2. Create a webpack configuration file (`webpack.config.js`) in your project root folder
+
+    ```js
+    const path = require('path');
+
+    module.exports = {
+      mode: 'development',
+      entry: './src/index.js',
+      output: {
+        path: path.resolve(__dirname, 'www'),
+        filename: 'index.bundle.js',
+      },
+      devtool: 'inline-source-map',
+    };
+    ```
+
+3. Execute the commands
+
+    ```shell
+    $ cordova build
+    $ cordova run -- --livereload
+    ```
+
+<details>
+<summary>Click here for details：</summary>
+
+1. Create a Cordova app
+
+    ```shell
+    $ cordova create cordova-plugin-webpack-example cordova.plugin.webpack.example CordovaPluginWebpackExample
+    ```
+
+2. Add platforms
+
+    ```shell
+    $ cd cordova-plugin-webpack-example
+    $ cordova platform add android ios
+    ```
+
+3. [Add this plugin](#Installation)
+
+4. Create a JavaScript file ([entry point](https://webpack.js.org/concepts/entry-points/ "entry points"))
+
+    ```shell
+    $ mkdir src
+    $ mv www/js/index.js src/index.js
+    ```
+
+5. Create a webpack configuration file (`webpack.config.js`) in your project root folder
+
+
+    ```js
+    const path = require('path');
+
+    module.exports = {
+      mode: 'development',
+      entry: './src/index.js',
+      output: {
+        path: path.resolve(__dirname, 'www'),
+        filename: 'index.bundle.js',
+      },
+      devtool: 'inline-source-map',
+    };
+    ```
+
+6. Fix a HTML file (`www/index.html`)
+
+    ```diff
+    -         <script type="text/javascript" src="js/index.js"></script>
+    +         <script type="text/javascript" src="index.bundle.js"></script>
+    ```
+
+7. Execute the commands
+
+    ```shell
+    $ cordova build
+    $ cordova run -- --livereload
+    ```
+
+</details>
+
+### Custome webpack configuration
+
+If you want to custom webpack configuration, modify your `webpack.config.js` file.
+
 
 ```js
 ...
@@ -117,14 +165,17 @@ module.exports = {
     new HtmlWebpackPlugin(),
   ],
   ...
-}
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
+    host: 'localhost',
+    port: '8000',
+    hot: false,
+  },
+  ...
+};
 ```
 
-#### Live Reload (Hot Module Replacement)
-
-By defaults:
-
-| option | default |
+| Option | Default |
 |--------|---------|
 | `devServer.contentBase`  | `www` |
 | `devServer.historyApiFallBack` | `true` |
@@ -133,43 +184,23 @@ By defaults:
 | `devServer.watchContentBase` | `true` |
 | `devServer.hot` | `true` |
 
-If you want to customize `devServer` options, modify `webpack.config.js` file as follows:
+For example, if you want page reloading (LiveReload) instead of hot module reloading (HMR), specify the `devServer.hot` option as `false`.
 
 ```js
 ...
 module.exports = {
   ...
   devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    host: 'localhost',
-    port: '8000',
+    hot: false,
   },
   ...
 };
 ```
 
-## CLI examples
+## Contribute
 
-```shell
-$ cordova prepare # webpack compile
-$ cordova prepare -- --livereload # webpack live reload
-$ cordova build # webpack compile
-$ cordova build -- --webpackConfig path/to/dir/webpack.config.babel.js # webpack compile
-$ cordova build -- --w path/to/dir/webpack.config.js --livereload # webpack live reload
-$ cordova run -- --w path/to/dir/webpack.config.js -l # webpack live reload 
-```
-
-## TODO
-
-- [x] Bundle with webpack before preparing.
-- [x] Live Reload (Hot Module Replacement) with webpack-dev-server after preparing.
-    - [x] Emulator
-    - [x] Device
+Contributions are always welcome! Please read the [contributing](./CONTRIBUTING.md) first.
 
 ## License
 
-[Apache-2.0](./LICENSE)
-
-## Author Information
-
-This plugin was created in 2018 by Kotaro Sugawara.
+[Apache-2.0](./LICENSE) © [Kotaro Sugawara](https://twitter.com/kotarella1110)

@@ -13,13 +13,13 @@ This plugin integrates [webpack](https://webpack.js.org "webpack") into your Cor
 ## Motivation
 
 Module bundlers such as webpack are essential for SPA (Single Page Application) development. Unfortunately, the Cordova workflow does not integrate webpack as a standard feature.
-This plugin makes webpack easy to integrate into Cordova workflow.
+
+Simply install this plugin to easily integrate webpack into your Cordova workflow.
 
 ## Features
 
-* Simply install this plugin and create a webpack configuration file in your project root folder to easily integrate integrate webpack into your Cordova workflow
-* Modifications made to HTML/CSS/JS in the source code results in an instant Cordova WebView update by LiveReloaad ([Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement "Hot Module Replacement | webpack"))
-* Supports devices and emulators for Android and iOS platforms
+* Ability to have build scripts by webpack when you build or run Cordova app
+* Ability to have LiveReload ([Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement "Hot Module Replacement | webpack")) run by Webpack Dev Server when you’re testing on a device or emulator for Android and iOS
 
 ## Installation
 
@@ -45,7 +45,7 @@ $ cordova { prepare | platform add | build | run } [<platform> [...]]
 
 #### Build
 
-To be compiled by webpack **before preparing** your Cordova app.
+**Before preparing** your Cordova app, build scripts by webpack.
 
 ```shell
 $ cordova prepare
@@ -54,7 +54,7 @@ $ cordova build -- --webpackConfig path/to/dir/webpack.config.js
 
 #### Live Reload (HMR)
 
-To be ran by Webpack Dev Server **after preparing** your Cordova app.
+**After preparing** your Cordova app, run LiveReload by Webpack Dev Server.
 
 ```shell
 $ cordova prepare -- --livereload
@@ -146,10 +146,10 @@ $ cordova run -- -w path/to/dir/webpack.config.babel.js -l
 
 </details>
 
-### Custome webpack configuration
+## Custome webpack configuration
 
+Basically, it works according to your webpack configuration file.
 If you want to custom webpack configuration, modify your `webpack.config.js` file.
-
 
 ```js
 ...

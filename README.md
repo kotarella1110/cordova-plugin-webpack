@@ -89,7 +89,7 @@ $ cordova run -- -w path/to/dir/webpack.config.babel.js -l
     ```
 
 <details>
-<summary>Click here for details：</summary>
+<summary>For more information...</summary>
 
 1. Create a Cordova app
 

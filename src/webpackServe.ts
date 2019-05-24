@@ -73,14 +73,11 @@ module.exports = (ctx: any) =>
       plugins: [
         ...(customWebpackConfig.plugins || []),
         new WebpackInjectPlugin(() =>
-          fs.readFileSync(
-            path.resolve(__dirname, '../scripts/www/injectCSP.js'),
-            'utf8',
-          ),
+          fs.readFileSync(path.join(__dirname, 'www/injectCSP.js'), 'utf8'),
         ),
         new WebpackInjectPlugin(() =>
           fs.readFileSync(
-            path.resolve(__dirname, '../scripts/www/injectCordovaScript.js'),
+            path.join(__dirname, 'www/injectCordovaScript.js'),
             'utf8',
           ),
         ),
@@ -117,7 +114,8 @@ module.exports = (ctx: any) =>
     };
 
     // HMR
-    if(devServerConfig.hot) WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerConfig);
+    if (devServerConfig.hot)
+      WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerConfig);
 
     const compiler = webpack(webpackConfig);
     const server = new WebpackDevServer(compiler, devServerConfig);

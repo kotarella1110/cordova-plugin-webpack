@@ -171,7 +171,7 @@ To resolve this, you must modify your `config.xml` file to enable cleartext supp
 
 ---
 
-## Custome webpack configuration
+## Custom webpack configuration
 
 Basically, it works according to your webpack configuration file.
 If you want to custom webpack configuration, modify your `webpack.config.js` file.

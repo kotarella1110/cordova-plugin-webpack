@@ -115,7 +115,6 @@ $ cordova run -- -w path/to/dir/webpack.config.babel.js -l
 
 5. Create a webpack configuration file (`webpack.config.js`) in your project root folder
 
-
     ```js
     const path = require('path');
 
@@ -145,6 +144,32 @@ $ cordova run -- -w path/to/dir/webpack.config.babel.js -l
     ```
 
 </details>
+
+---
+
+**NOTE**
+
+Starting with Android 9 (API level 28), cleartext support is disabled by default. Therefore, LiveReload does not work on Android 9.0 and higher devices and emulators. Also see [this issue](https://github.com/kotarella1110/cordova-plugin-webpack/issues/9#issuecomment-495048614).
+
+To resolve this, you must modify your `config.xml` file to enable cleartext support.
+
+1. Add `xmlns:android="http://schemas.android.com/apk/res/android"` in `widget` root element
+
+    ```xml
+    <widget id="cordova.plugin.webpack.example" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    ```
+
+2. Enable `android:usesCleartextTraffic` attribute in `application` element
+
+    ```xml
+    <platform name="android">
+        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+    </platform>
+    ```
+
+---
 
 ## Custome webpack configuration
 

@@ -16,6 +16,10 @@ Module bundlers such as webpack are essential for SPA (Single Page Application) 
 
 Simply install this plugin to easily integrate webpack into your Cordova workflow.
 
+## Demo
+
+![Demo](./media/cordova-plugin-webpack-demo.gif)
+
 ## Features
 
 * Ability to have build scripts by webpack when you build or run Cordova app

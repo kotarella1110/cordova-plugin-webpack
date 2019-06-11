@@ -1,6 +1,6 @@
-import * as path from 'path';
-import * as interpret from 'interpret';
-import * as rechoir from 'rechoir';
+import path from 'path';
+import interpret from 'interpret';
+import rechoir from 'rechoir';
 import findup from 'findup-sync';
 import webpack from 'webpack';
 

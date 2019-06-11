@@ -1,13 +1,13 @@
 import 'source-map-support/register';
-import * as path from 'path';
-import * as fs from 'fs';
-import * as glob from 'glob';
-import * as ip from 'ip';
+import path from 'path';
+import fs from 'fs';
+import glob from 'glob';
+import ip from 'ip';
 import argvParse from 'yargs-parser';
 import webpack from 'webpack';
 import WebpackInjectPlugin from 'webpack-inject-plugin';
 import WebpackDevServer from 'webpack-dev-server';
-import * as express from 'express';
+import express from 'express';
 import { choosePort } from 'react-dev-utils/WebpackDevServerUtils';
 import * as webpackHelpers from './utils/webpackHelpers';
 import CordovaConfigParser from './utils/CordovaConfigParser';

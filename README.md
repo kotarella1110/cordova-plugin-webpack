@@ -25,6 +25,12 @@ Simply install this plugin to easily integrate webpack into your Cordova workflo
 * Ability to have build scripts by webpack when you build or run Cordova app
 * Ability to have LiveReload ([Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement "Hot Module Replacement | webpack")) run by Webpack Dev Server when you’re testing on a device or emulator for Android and iOS
 
+## Supported Platforms
+
+* Browser
+* Android
+* iOS
+
 ## Installation
 
 ```shell

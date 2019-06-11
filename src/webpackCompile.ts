@@ -5,7 +5,7 @@ import * as webpackHelpers from './utils/webpackHelpers';
 
 module.exports = (ctx: any) =>
   new Promise((resolve, reject) => {
-    const platforms = ['browser', 'android', 'ios'];
+    const platforms = ['browser', 'android', 'ios'] as const;
     if (!platforms.some(platform => ctx.opts.platforms.includes(platform))) {
       resolve();
       return;

@@ -18,7 +18,7 @@ export const defaultWebpackConfigPath = (cwd: string) => {
 };
 
 export const webpackConfig = (cwd: string, configPath?: string) => {
-  const reslvedConfigPath = (() => {
+  const resolvedConfigPath = (() => {
     if (!configPath) {
       return defaultWebpackConfigPath(cwd);
     }
@@ -29,10 +29,12 @@ export const webpackConfig = (cwd: string, configPath?: string) => {
   })();
 
   // register module loaders
-  rechoir.prepare(interpret.extensions, reslvedConfigPath);
+  rechoir.prepare(interpret.extensions, resolvedConfigPath);
 
-  // eslint-disable-next-line global-require, import/no-dynamic-require
-  const config: { default: webpack.Configuration } = require(reslvedConfigPath);
+  const config: {
+    default: webpack.Configuration;
+    // eslint-disable-next-line global-require, import/no-dynamic-require
+  } = require(resolvedConfigPath);
 
   return config.default || config;
 };

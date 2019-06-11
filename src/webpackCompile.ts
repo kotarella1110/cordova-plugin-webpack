@@ -1,7 +1,7 @@
 import 'source-map-support/register';
 import argvParse from 'yargs-parser';
 import webpack from 'webpack';
-import * as webpackHelper from './utils/webpackHelper';
+import * as webpackHelpers from './utils/webpackHelpers';
 
 module.exports = (ctx: any) =>
   new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ module.exports = (ctx: any) =>
       return;
     }
 
-    const customWebpackConfig: webpack.Configuration = webpackHelper.webpackConfig(
+    const customWebpackConfig: webpack.Configuration = webpackHelpers.webpackConfig(
       ctx.opts.projectRoot,
       argv.webpackConfig || argv.w,
     );

@@ -9,7 +9,7 @@ import WebpackInjectPlugin from 'webpack-inject-plugin';
 import WebpackDevServer from 'webpack-dev-server';
 import * as express from 'express';
 import { choosePort } from 'react-dev-utils/WebpackDevServerUtils';
-import * as webpackHelper from './utils/webpackHelper';
+import * as webpackHelpers from './utils/webpackHelpers';
 import CordovaConfigParser from './utils/CordovaConfigParser';
 
 module.exports = (ctx: any) =>
@@ -63,7 +63,7 @@ module.exports = (ctx: any) =>
         });
     });
 
-    const customWebpackConfig: webpack.Configuration = webpackHelper.webpackConfig(
+    const customWebpackConfig: webpack.Configuration = webpackHelpers.webpackConfig(
       ctx.opts.projectRoot,
       argv.webpackConfig || argv.w,
     );

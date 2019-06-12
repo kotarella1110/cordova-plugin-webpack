@@ -1,6 +1,7 @@
 import currentDevice from 'current-device';
+import isWebview from 'is-ua-webview';
 
-const platforms = ['browser', 'android', 'ios'];
+const platforms = ['browser', 'android', 'ios'] as const;
 const injectCordovaScript = (platform: typeof platforms[number]) => {
   const existingScriptEl = document.querySelector<HTMLScriptElement>(
     'script[src="cordova.js"]',
@@ -15,10 +16,10 @@ const injectCordovaScript = (platform: typeof platforms[number]) => {
   console.log(`Injected cordova.js of ${platform} platform.`);
 };
 
-if (currentDevice.ios()) {
-  injectCordovaScript('ios');
+if (!isWebview(navigator.userAgent)) {
+  injectCordovaScript('browser');
 } else if (currentDevice.android()) {
   injectCordovaScript('android');
-} else {
-  injectCordovaScript('browser');
+} else if (currentDevice.ios()) {
+  injectCordovaScript('ios');
 }

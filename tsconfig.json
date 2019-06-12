@@ -12,12 +12,18 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "baseUrl": ".",
+    "paths": {
+      "*": [
+        "typings/*"
+      ]
+    },
+    "typeRoots": [
+      "./typings",
+      "./node_modules/@types"
+    ],
     "sourceMap": true
   },
   "include": [
     "src/**/*"
-  ],
-  "exclude": [
-    "src/www/**/*"
   ]
 }

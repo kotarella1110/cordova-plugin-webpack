@@ -1,5 +1,7 @@
-import path from 'path';
+/* eslint-disable import/no-extraneous-dependencies */
 import webpack from 'webpack';
+import path from 'path';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 const config: webpack.Configuration = {
   mode: 'development',
@@ -13,7 +15,7 @@ const config: webpack.Configuration = {
   },
   devtool: 'eval-source-map',
   resolve: {
-    extensions: ['.ts'],
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules: [
@@ -23,6 +25,7 @@ const config: webpack.Configuration = {
       },
     ],
   },
+  plugins: [new CleanWebpackPlugin()],
 };
 
 export default config;

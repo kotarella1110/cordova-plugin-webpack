@@ -114,11 +114,12 @@ module.exports = (ctx: any) =>
       }
       glob
         .sync(
-          `${path.join(
+          path.join(
             ctx.opts.projectRoot,
             'platforms',
             platform,
-          )}/**/config.xml`,
+            '**/config.xml',
+          ),
         )
         .forEach(configXmlPath => {
           const configXml = new CordovaConfigParser(configXmlPath);

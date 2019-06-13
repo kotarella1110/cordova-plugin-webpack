@@ -12,7 +12,7 @@ if (existingPolicyEl) existingPolicyEl.remove();
 const policyEl = document.createElement('meta');
 policyEl.setAttribute('http-equiv', 'Content-Security-Policy');
 policyEl.setAttribute('content', exstingPolicyStr || defaultPolicyStr);
-const policy = new Policy(policyEl.getAttribute('content'));
+const policy = new Policy(policyEl.getAttribute('content') as string);
 policy.add('default-src', '*');
 policyEl.setAttribute('content', policy.toString());
 document.head.appendChild(policyEl);

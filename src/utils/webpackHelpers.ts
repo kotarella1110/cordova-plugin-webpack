@@ -29,7 +29,6 @@ export const webpackConfig = (cwd: string, configPath?: string) => {
     return path.resolve(cwd, configPath);
   })();
 
-  console.log(resolvedConfigPath);
   // register module loaders
   rechoir.prepare(interpret.extensions, resolvedConfigPath);
 

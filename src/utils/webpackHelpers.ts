@@ -10,9 +10,10 @@ export const defaultWebpackConfigPath = (cwd: string) => {
   const configFileRegExp = `(${defaultConfigFileNames.join(
     '|',
   )})(${extensions.join('|')})`;
-  const configPath = findup(configFileRegExp, {
-    cwd,
-  });
+  const configPath =
+    findup(configFileRegExp, {
+      cwd,
+    }) || path.join(cwd, 'webpack.config.js');
 
   return configPath;
 };
@@ -28,6 +29,7 @@ export const webpackConfig = (cwd: string, configPath?: string) => {
     return path.resolve(cwd, configPath);
   })();
 
+  console.log(resolvedConfigPath);
   // register module loaders
   rechoir.prepare(interpret.extensions, resolvedConfigPath);
 

@@ -15,6 +15,9 @@ import CordovaConfigParser from './utils/CordovaConfigParser';
 module.exports = (ctx: any) =>
   new Promise(async (resolve, reject) => {
     const platforms = ['browser', 'android', 'ios'] as const;
+    const targetPlatforms = platforms.filter(platform =>
+      ctx.opts.platforms.includes(platform),
+    );
     if (!platforms.some(platform => ctx.opts.platforms.includes(platform))) {
       resolve();
       return;
@@ -75,19 +78,18 @@ module.exports = (ctx: any) =>
         if (customDevServerConfig.before) {
           customDevServerConfig.before(app, server);
         }
-        platforms.forEach(platform => {
-          glob
-            .sync(
+        targetPlatforms.forEach(platform => {
+          app.use(
+            `/${platform}`,
+            express.static(
               path.join(
                 ctx.opts.projectRoot,
                 'platforms',
                 platform,
                 'platform_www',
               ),
-            )
-            .forEach(platformWwwPath => {
-              app.use(`/${platform}`, express.static(platformWwwPath));
-            });
+            ),
+          );
         });
       },
     };
@@ -96,7 +98,7 @@ module.exports = (ctx: any) =>
     if (devServerConfig.hot)
       WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerConfig);
 
-    platforms.forEach(platform => {
+    targetPlatforms.forEach(platform => {
       if (platform === 'browser') {
         const html = createHTML({
           head: `<meta http-equiv="refresh" content="0;URL=${urls.localUrlForBrowser}">`,

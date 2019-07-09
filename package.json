@@ -43,16 +43,16 @@
     "@types/findup-sync": "^2.0.2",
     "@types/interpret": "^1.1.1",
     "@types/ip": "^1.1.0",
-    "@types/node": "^12.0.8",
+    "@types/node": "^12.6.1",
     "@types/react-dev-utils": "^9.0.1",
     "@types/rechoir": "^0.6.1",
-    "@types/webpack": "^4.4.33",
+    "@types/webpack": "^4.4.34",
     "@types/webpack-dev-server": "^3.1.6",
     "@types/yargs-parser": "^13.0.0",
     "cordova-common": "^3.2.0",
     "create-html": "^4.1.0",
     "csp-parse": "0.0.2",
-    "current-device": "^0.8.0",
+    "current-device": "^0.8.1",
     "elementtree": "^0.1.7",
     "express": "^4.17.1",
     "findup-sync": "^3.0.0",
@@ -63,7 +63,7 @@
     "react-dev-utils": "^9.0.1",
     "rechoir": "^0.7.0",
     "source-map-support": "^0.5.12",
-    "webpack": "^4.35.0",
+    "webpack": "^4.35.3",
     "webpack-dev-server": "^3.7.2",
     "webpack-inject-plugin": "^1.5.2",
     "yargs-parser": "^13.1.1"
@@ -73,27 +73,26 @@
     "@commitlint/config-conventional": "^8.0.0",
     "@commitlint/prompt-cli": "^8.0.0",
     "@types/jest": "^24.0.15",
-    "@typescript-eslint/eslint-plugin": "^1.10.2",
-    "@typescript-eslint/parser": "^1.10.2",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^5.0.0",
-    "eslint-plugin-import": "^2.17.3",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-prettier": "^3.1.0",
-    "husky": "^2.4.1",
-    "install": "^0.12.2",
+    "husky": "^3.0.0",
+    "install": "^0.13.0",
     "jest": "^24.8.0",
-    "lint-staged": "^8.2.1",
-    "npm": "^6.9.0",
+    "lint-staged": "^9.1.0",
     "npm-check": "^5.9.0",
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
     "ts-jest": "^24.0.2",
-    "ts-loader": "^6.0.3",
+    "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
-    "typescript": "^3.5.2",
-    "webpack-cli": "^3.3.4"
+    "typescript": "^3.5.3",
+    "webpack-cli": "^3.3.5"
   },
   "husky": {
     "hooks": {
@@ -102,15 +101,9 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "*.{js,ts}": [
-        "npm run lint:fix",
-        "git add"
-      ]
-    },
-    "ignore": [
-      "node_modules/**",
-      "scripts/**"
+    "*.{js,ts}": [
+      "npm run lint:fix",
+      "git add"
     ]
   }
 }

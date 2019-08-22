@@ -21,6 +21,10 @@ module.exports = async (ctx: any) => {
     return;
   }
 
+  if (!ctx.opts.options || !ctx.opts.options.argv) {
+    return;
+  }
+
   const argv = argvParse(ctx.opts.options.argv.join(' '));
   if (!argv.livereload && !argv.l) {
     return;

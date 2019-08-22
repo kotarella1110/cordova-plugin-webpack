@@ -10,6 +10,7 @@ module.exports = {
   parserOptions: {
     sourceType: 'module',
     project: './tsconfig.json',
+    createDefaultProgram: true,
   },
   rules: {
     'prettier/prettier': [

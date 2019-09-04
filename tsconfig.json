@@ -21,7 +21,8 @@
       "./typings",
       "./node_modules/@types"
     ],
-    "sourceMap": true
+    "sourceMap": true,
+    "noErrorTruncation": true,
   },
   "include": [
     "src/**/*"

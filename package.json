@@ -41,33 +41,29 @@
   "homepage": "https://github.com/kotarella1110/cordova-plugin-webpack#readme",
   "dependencies": {
     "@types/elementtree": "^0.1.0",
-    "@types/findup-sync": "^2.0.2",
-    "@types/interpret": "^1.1.1",
-    "@types/ip": "^1.1.0",
     "@types/node": "^12.7.2",
     "@types/react-dev-utils": "^9.0.1",
-    "@types/rechoir": "^0.6.1",
+    "@types/supports-color": "^5.3.0",
     "@types/webpack": "^4.39.0",
     "@types/webpack-dev-server": "^3.1.7",
-    "@types/yargs-parser": "^13.0.0",
+    "@types/yargs": "^13.0.2",
     "cordova-common": "^3.2.0",
     "create-html": "^4.1.0",
     "csp-parse": "0.0.2",
     "current-device": "^0.8.2",
     "elementtree": "^0.1.7",
     "express": "^4.17.1",
-    "findup-sync": "^4.0.0",
     "glob": "^7.1.4",
-    "interpret": "^1.2.0",
-    "ip": "^1.1.5",
     "is-ua-webview": "^1.0.1",
     "react-dev-utils": "^9.0.3",
-    "rechoir": "^0.7.0",
     "source-map-support": "^0.5.13",
+    "supports-color": "^7.0.0",
     "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0",
     "webpack-inject-plugin": "^1.5.3",
-    "yargs-parser": "^13.1.1"
+    "yargs": "^14.0.0",
+    "yargs-unparser": "^1.5.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
@@ -93,8 +89,7 @@
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
-    "typescript": "^3.5.3",
-    "webpack-cli": "^3.3.7"
+    "typescript": "^3.5.3"
   },
   "husky": {
     "hooks": {

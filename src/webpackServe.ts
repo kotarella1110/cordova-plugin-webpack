@@ -2,14 +2,27 @@ import 'source-map-support/register';
 import path from 'path';
 import fs from 'fs';
 import glob from 'glob';
-import argvParse from 'yargs-parser';
+import yargs from 'yargs/yargs';
+import yargsUnparser from 'yargs-unparser';
 import webpack from 'webpack';
-import WebpackInjectPlugin from 'webpack-inject-plugin';
 import WebpackDevServer from 'webpack-dev-server';
+import devServerYargsOptions from 'webpack-dev-server/bin/options';
+import configYargs from 'webpack-cli/bin/config/config-yargs';
+import convertArgv from 'webpack-cli/bin/utils/convert-argv';
+import WebpackInjectPlugin from 'webpack-inject-plugin';
 import express from 'express';
 import createHTML from 'create-html';
 import { choosePort, prepareUrls } from 'react-dev-utils/WebpackDevServerUtils';
-import * as webpackHelpers from './utils/webpackHelpers';
+import {
+  defaultHost,
+  defaultPort,
+  createConfig,
+  getVersion as getWebpackVersion,
+} from './utils/webpackHelpers';
+import {
+  options as pluginYargsOptions,
+  createArguments,
+} from './utils/yargsHelpers';
 import CordovaConfigParser from './utils/CordovaConfigParser';
 
 module.exports = async (ctx: any) => {
@@ -25,22 +38,46 @@ module.exports = async (ctx: any) => {
     return;
   }
 
-  const argv = argvParse(ctx.opts.options.argv.join(' '));
-  if (!argv.livereload && !argv.l) {
+  const pluginYargs = yargs(ctx.opts.options.argv);
+  // set cordova-plugin-webpack options
+  const pluginArgv = pluginYargs
+    .options(pluginYargsOptions)
+    .version(
+      `${ctx.opts.plugin.pluginInfo.id} ${ctx.opts.plugin.pluginInfo.version}`,
+    ).argv;
+
+  if (!pluginArgv.livereload) {
     return;
   }
 
-  const customWebpackConfig: webpack.Configuration = webpackHelpers.webpackConfig(
-    ctx.opts.projectRoot,
-    argv.webpackConfig || argv.w,
+  const webpackYargs = yargs(
+    yargsUnparser(
+      createArguments(
+        typeof pluginArgv.webpack === 'object' ? pluginArgv.webpack! : {},
+      ),
+    ),
   );
-  const customDevServerConfig: WebpackDevServer.Configuration =
-    customWebpackConfig.devServer || {};
+  // set webpack yargs options
+  configYargs(webpackYargs);
+  // set webpack-dev-server yargs options
+  const webpackArgv = webpackYargs
+    .options(devServerYargsOptions)
+    .version(getWebpackVersion()).argv;
+
+  const [customWebpackConfig, customDevServerConfig] = await createConfig(
+    convertArgv(webpackArgv), // create webpack configuration from yargs.argv and webpack.config.js
+    webpackArgv,
+  );
 
   const protocol = customDevServerConfig.https ? 'https' : 'http';
-  const host = customDevServerConfig.host || '0.0.0.0';
-  const defaultPort = customDevServerConfig.port || 8080;
-  const port = await choosePort(host, defaultPort);
+  const host =
+    !customDevServerConfig.host || customDevServerConfig.host === 'localhost'
+      ? defaultHost
+      : customDevServerConfig.host;
+  const port = await choosePort(
+    host,
+    customDevServerConfig.port || defaultPort,
+  );
   if (!port) {
     return;
   }

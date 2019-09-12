@@ -1,41 +1,50 @@
-import path from 'path';
-import interpret from 'interpret';
-import rechoir from 'rechoir';
-import findup from 'findup-sync';
+import yargs from 'yargs';
 import webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+import createDevServerConfig from 'webpack-dev-server/lib/utils/createConfig';
+import { version as webpackVersion } from 'webpack/package.json';
+import { version as webpackCliVersion } from 'webpack-cli/package.json';
+import { version as devServerVersion } from 'webpack-dev-server/package.json';
+import isPromise from './isPromise';
 
-export const defaultWebpackConfigPath = (cwd: string) => {
-  const extensions = Object.keys(interpret.extensions);
-  const defaultConfigFileNames = ['webpack.config', 'webpackfile'];
-  const configFileRegExp = `(${defaultConfigFileNames.join(
-    '|',
-  )})(${extensions.join('|')})`;
-  const configPath =
-    findup(configFileRegExp, {
-      cwd,
-    }) || path.join(cwd, 'webpack.config.js');
+export const defaultHost = '0.0.0.0';
+export const defaultPort = 8080;
 
-  return configPath;
-};
+export function createConfig(
+  config: webpack.Configuration | Promise<webpack.Configuration>,
+): Promise<webpack.Configuration>;
 
-export const webpackConfig = (cwd: string, configPath?: string) => {
-  const resolvedConfigPath = (() => {
-    if (!configPath) {
-      return defaultWebpackConfigPath(cwd);
+export function createConfig<T>(
+  config: webpack.Configuration | Promise<webpack.Configuration>,
+  argv: yargs.Argv<T>['argv'],
+): Promise<[webpack.Configuration, WebpackDevServer.Configuration]>;
+
+export async function createConfig<T>(
+  config: webpack.Configuration | Promise<webpack.Configuration>,
+  argv?: yargs.Argv<T>['argv'],
+) {
+  if (isPromise(config)) {
+    if (argv) {
+      return createConfig(await config, argv);
     }
-    if (path.isAbsolute(configPath)) {
-      return path.resolve(configPath);
-    }
-    return path.resolve(cwd, configPath);
-  })();
+    return createConfig(await config);
+  }
 
-  // register module loaders
-  rechoir.prepare(interpret.extensions, resolvedConfigPath);
+  if (argv) {
+    const options = createDevServerConfig(config, argv, {
+      port: defaultPort,
+    });
+    // host localhost to 0.0.0.0
+    return [config, options];
+  }
 
-  const config: {
-    default: webpack.Configuration;
-    // eslint-disable-next-line global-require, import/no-dynamic-require
-  } = require(resolvedConfigPath);
+  return config;
+}
 
-  return config.default || config;
-};
+export function getVersion() {
+  return [
+    `webpack ${webpackVersion}`,
+    `webpack-cli ${webpackCliVersion}`,
+    `webpack-dev-server ${devServerVersion}`,
+  ].join('\n');
+}

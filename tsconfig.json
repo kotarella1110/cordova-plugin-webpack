@@ -22,6 +22,7 @@
       "./node_modules/@types"
     ],
     "sourceMap": true,
+    "resolveJsonModule":true,
     "noErrorTruncation": true,
   },
   "include": [

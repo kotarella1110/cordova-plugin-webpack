@@ -50,16 +50,18 @@ module.exports = async (ctx: any) => {
     convertArgv(webpackArgv), // create webpack configuration from yargs.argv and webpack.config.js
   );
   const compiler = webpack(customWebpackConfig);
-
-  compiler.run((err, stats) => {
-    if (err) {
-      throw err;
-    }
-    console.log(
-      stats.toString({
-        chunks: false,
-        colors: true,
-      }),
-    );
+  await new Promise((resolve, reject) => {
+    compiler.run((err, stats) => {
+      if (err) {
+        reject(err);
+      }
+      console.log(
+        stats.toString({
+          chunks: false,
+          colors: true,
+        }),
+      );
+      resolve();
+    });
   });
 };

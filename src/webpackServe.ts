@@ -170,10 +170,13 @@ module.exports = async (ctx: any) => {
 
   const compiler = webpack(webpackConfig);
   const server = new WebpackDevServer(compiler, devServerConfig);
-  server.listen(port, host, err => {
-    if (err) {
-      throw err;
-    }
-    console.log('Starting the development server...\n');
+  await new Promise((resolve, reject) => {
+    server.listen(port, host, err => {
+      if (err) {
+        reject(err);
+      }
+      console.log('Starting the development server...\n');
+      resolve();
+    });
   });
 };

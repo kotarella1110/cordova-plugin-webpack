@@ -23,7 +23,7 @@
     ],
     "sourceMap": true,
     "resolveJsonModule":true,
-    "noErrorTruncation": true,
+    "noErrorTruncation": true
   },
   "include": [
     "src/**/*"

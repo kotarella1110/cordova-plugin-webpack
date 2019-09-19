@@ -23,16 +23,18 @@ module.exports = async (ctx: any) => {
     argv.webpackConfig || argv.w,
   );
   const compiler = webpack(customWebpackConfig);
-
-  compiler.run((err, stats) => {
-    if (err) {
-      throw err;
-    }
-    console.log(
-      stats.toString({
-        chunks: false,
-        colors: true,
-      }),
-    );
+  await new Promise((resolve, reject) => {
+    compiler.run((err, stats) => {
+      if (err) {
+        reject(err);
+      }
+      console.log(
+        stats.toString({
+          chunks: false,
+          colors: true,
+        }),
+      );
+      resolve();
+    });
   });
 };

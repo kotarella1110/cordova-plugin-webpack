@@ -20,10 +20,3 @@ export function createArguments<T extends object>(obj: T): Arguments<T> {
     ...obj,
   };
 }
-
-// yargs
-//     .help('help')
-//     .alias('help', 'h')
-//     .version()
-//     .alias('version', 'v')
-//     .options();

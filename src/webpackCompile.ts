@@ -2,16 +2,14 @@ import 'source-map-support/register';
 import yargs from 'yargs';
 import yargsUnparser from 'yargs-unparser';
 import webpack from 'webpack';
-import configYargs from 'webpack-cli/bin/config/config-yargs';
 import convertArgv from 'webpack-cli/bin/utils/convert-argv';
+import is from '@sindresorhus/is';
 import {
-  createConfig,
-  getVersion as getWebpackVersion,
-} from './utils/webpackHelpers';
-import {
-  options as pluginYargsOptions,
-  createArguments,
-} from './utils/yargsHelpers';
+  plugin as pluginYargsOptions,
+  webpack as webpackYargsOptions,
+} from './options';
+import { createConfig } from './utils/webpackHelpers';
+import { createArguments, getVersion } from './utils/yargsHelpers';
 
 module.exports = async (ctx: any) => {
   const platforms = ['browser', 'android', 'ios'] as const;
@@ -24,9 +22,8 @@ module.exports = async (ctx: any) => {
   }
 
   const pluginYargs = yargs(ctx.opts.options.argv);
-  // set cordova-plugin-webpack options
   const pluginArgv = pluginYargs
-    .options(pluginYargsOptions)
+    .options(pluginYargsOptions) // set cordova-plugin-webpack options
     .version(
       `${ctx.opts.plugin.pluginInfo.id} ${ctx.opts.plugin.pluginInfo.version}`,
     ).argv;
@@ -37,14 +34,12 @@ module.exports = async (ctx: any) => {
 
   const webpackYargs = yargs(
     yargsUnparser(
-      createArguments(
-        typeof pluginArgv.webpack === 'object' ? pluginArgv.webpack! : {},
-      ),
+      createArguments(is.object(pluginArgv.webpack) ? pluginArgv.webpack : {}),
     ),
   );
-  // set webpack yargs options
-  configYargs(webpackYargs);
-  const webpackArgv = webpackYargs.version(getWebpackVersion()).argv;
+  const webpackArgv = webpackYargs
+    .options(webpackYargsOptions) // set webpack yargs options
+    .version(getVersion()).argv;
 
   const customWebpackConfig = await createConfig(
     convertArgv(webpackArgv), // create webpack configuration from yargs.argv and webpack.config.js

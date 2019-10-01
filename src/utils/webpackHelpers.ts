@@ -2,10 +2,7 @@ import yargs from 'yargs';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import createDevServerConfig from 'webpack-dev-server/lib/utils/createConfig';
-import { version as webpackVersion } from 'webpack/package.json';
-import { version as webpackCliVersion } from 'webpack-cli/package.json';
-import { version as devServerVersion } from 'webpack-dev-server/package.json';
-import isPromise from './isPromise';
+import is from '@sindresorhus/is';
 
 export const defaultHost = '0.0.0.0';
 export const defaultPort = 8080;
@@ -23,7 +20,7 @@ export async function createConfig<T>(
   config: webpack.Configuration | Promise<webpack.Configuration>,
   argv?: yargs.Argv<T>['argv'],
 ) {
-  if (isPromise(config)) {
+  if (is.promise(config)) {
     if (argv) {
       return createConfig(await config, argv);
     }
@@ -39,12 +36,4 @@ export async function createConfig<T>(
   }
 
   return config;
-}
-
-export function getVersion() {
-  return [
-    `webpack ${webpackVersion}`,
-    `webpack-cli ${webpackCliVersion}`,
-    `webpack-dev-server ${devServerVersion}`,
-  ].join('\n');
 }

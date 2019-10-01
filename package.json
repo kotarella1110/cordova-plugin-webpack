@@ -40,6 +40,7 @@
   },
   "homepage": "https://github.com/kotarella1110/cordova-plugin-webpack#readme",
   "dependencies": {
+    "@sindresorhus/is": "^1.0.0",
     "@types/elementtree": "^0.1.0",
     "@types/node": "^12.7.5",
     "@types/react-dev-utils": "^9.0.1",

@@ -1,17 +1,7 @@
 import { Arguments } from 'yargs';
-
-export const options = {
-  livereload: {
-    type: 'boolean' as const,
-    alias: 'l',
-    describe: 'Enables LiveReload (HMR)',
-    default: false,
-  },
-  webpack: {
-    alias: 'w',
-    describe: 'Passed to the webpack-cli or webpack-dev-server options',
-  },
-};
+import { version as webpackVersion } from 'webpack/package.json';
+import { version as webpackCliVersion } from 'webpack-cli/package.json';
+import { version as devServerVersion } from 'webpack-dev-server/package.json';
 
 export function createArguments<T extends object>(obj: T): Arguments<T> {
   return {
@@ -19,4 +9,12 @@ export function createArguments<T extends object>(obj: T): Arguments<T> {
     $0: '',
     ...obj,
   };
+}
+
+export function getVersion() {
+  return [
+    `webpack ${webpackVersion}`,
+    `webpack-cli ${webpackCliVersion}`,
+    `webpack-dev-server ${devServerVersion}`,
+  ].join('\n');
 }

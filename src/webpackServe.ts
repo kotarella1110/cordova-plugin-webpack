@@ -6,23 +6,19 @@ import yargs from 'yargs/yargs';
 import yargsUnparser from 'yargs-unparser';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import devServerYargsOptions from 'webpack-dev-server/bin/options';
-import configYargs from 'webpack-cli/bin/config/config-yargs';
 import convertArgv from 'webpack-cli/bin/utils/convert-argv';
 import WebpackInjectPlugin from 'webpack-inject-plugin';
+import is from '@sindresorhus/is';
 import express from 'express';
 import createHTML from 'create-html';
 import { choosePort, prepareUrls } from 'react-dev-utils/WebpackDevServerUtils';
 import {
-  defaultHost,
-  defaultPort,
-  createConfig,
-  getVersion as getWebpackVersion,
-} from './utils/webpackHelpers';
-import {
-  options as pluginYargsOptions,
-  createArguments,
-} from './utils/yargsHelpers';
+  plugin as pluginYargsOptions,
+  webpack as webpackYargsOptions,
+  devServer as devServerYargsOptions,
+} from './options';
+import { defaultHost, defaultPort, createConfig } from './utils/webpackHelpers';
+import { createArguments, getVersion } from './utils/yargsHelpers';
 import CordovaConfigParser from './utils/CordovaConfigParser';
 
 module.exports = async (ctx: any) => {
@@ -39,9 +35,8 @@ module.exports = async (ctx: any) => {
   }
 
   const pluginYargs = yargs(ctx.opts.options.argv);
-  // set cordova-plugin-webpack options
   const pluginArgv = pluginYargs
-    .options(pluginYargsOptions)
+    .options(pluginYargsOptions) // set cordova-plugin-webpack options
     .version(
       `${ctx.opts.plugin.pluginInfo.id} ${ctx.opts.plugin.pluginInfo.version}`,
     ).argv;
@@ -52,17 +47,14 @@ module.exports = async (ctx: any) => {
 
   const webpackYargs = yargs(
     yargsUnparser(
-      createArguments(
-        typeof pluginArgv.webpack === 'object' ? pluginArgv.webpack! : {},
-      ),
+      createArguments(is.object(pluginArgv.webpack) ? pluginArgv.webpack : {}),
     ),
   );
-  // set webpack yargs options
-  configYargs(webpackYargs);
-  // set webpack-dev-server yargs options
+
   const webpackArgv = webpackYargs
-    .options(devServerYargsOptions)
-    .version(getWebpackVersion()).argv;
+    .options(webpackYargsOptions) // set webpack yargs options
+    .options(devServerYargsOptions) // set webpack-dev-server yargs options
+    .version(getVersion()).argv;
 
   const [customWebpackConfig, customDevServerConfig] = await createConfig(
     convertArgv(webpackArgv), // create webpack configuration from yargs.argv and webpack.config.js
@@ -170,6 +162,7 @@ module.exports = async (ctx: any) => {
 
   const compiler = webpack(webpackConfig);
   const server = new WebpackDevServer(compiler, devServerConfig);
+
   await new Promise((resolve, reject) => {
     server.listen(port, host, err => {
       if (err) {

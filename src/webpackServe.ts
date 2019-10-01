@@ -159,6 +159,14 @@ module.exports = async (ctx: any) => {
   const compiler = webpack(webpackConfig);
   const server = new WebpackDevServer(compiler, devServerConfig);
 
+  const signals = ['SIGINT', 'SIGTERM'] as const;
+  signals.forEach(signal => {
+    process.on(signal, () => {
+      server.close();
+      process.exit();
+    });
+  });
+
   await new Promise((resolve, reject) => {
     server.listen(port, host, err => {
       if (err) {

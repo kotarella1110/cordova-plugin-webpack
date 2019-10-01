@@ -4,10 +4,7 @@ import yargsUnparser from 'yargs-unparser';
 import webpack from 'webpack';
 import convertArgv from 'webpack-cli/bin/utils/convert-argv';
 import is from '@sindresorhus/is';
-import {
-  plugin as pluginYargsOptions,
-  webpack as webpackYargsOptions,
-} from './options';
+import options from './options';
 import { createConfig } from './utils/webpackHelpers';
 import { createArguments, getVersion } from './utils/yargsHelpers';
 
@@ -23,7 +20,7 @@ module.exports = async (ctx: any) => {
 
   const pluginYargs = yargs(ctx.opts.options.argv);
   const pluginArgv = pluginYargs
-    .options(pluginYargsOptions) // set cordova-plugin-webpack options
+    .options(options.plugin) // set cordova-plugin-webpack options
     .version(
       `${ctx.opts.plugin.pluginInfo.id} ${ctx.opts.plugin.pluginInfo.version}`,
     ).argv;
@@ -38,7 +35,7 @@ module.exports = async (ctx: any) => {
     ),
   );
   const webpackArgv = webpackYargs
-    .options(webpackYargsOptions) // set webpack yargs options
+    .options(options.webpack) // set webpack yargs options
     .version(getVersion()).argv;
 
   const customWebpackConfig = await createConfig(

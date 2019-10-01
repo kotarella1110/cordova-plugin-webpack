@@ -12,11 +12,7 @@ import is from '@sindresorhus/is';
 import express from 'express';
 import createHTML from 'create-html';
 import { choosePort, prepareUrls } from 'react-dev-utils/WebpackDevServerUtils';
-import {
-  plugin as pluginYargsOptions,
-  webpack as webpackYargsOptions,
-  devServer as devServerYargsOptions,
-} from './options';
+import options from './options';
 import { defaultHost, defaultPort, createConfig } from './utils/webpackHelpers';
 import { createArguments, getVersion } from './utils/yargsHelpers';
 import CordovaConfigParser from './utils/CordovaConfigParser';
@@ -36,7 +32,7 @@ module.exports = async (ctx: any) => {
 
   const pluginYargs = yargs(ctx.opts.options.argv);
   const pluginArgv = pluginYargs
-    .options(pluginYargsOptions) // set cordova-plugin-webpack options
+    .options(options.plugin) // set cordova-plugin-webpack options
     .version(
       `${ctx.opts.plugin.pluginInfo.id} ${ctx.opts.plugin.pluginInfo.version}`,
     ).argv;
@@ -52,8 +48,8 @@ module.exports = async (ctx: any) => {
   );
 
   const webpackArgv = webpackYargs
-    .options(webpackYargsOptions) // set webpack yargs options
-    .options(devServerYargsOptions) // set webpack-dev-server yargs options
+    .options(options.webpack) // set webpack yargs options
+    .options(options.devServer) // set webpack-dev-server yargs options
     .version(getVersion()).argv;
 
   const [customWebpackConfig, customDevServerConfig] = await createConfig(

@@ -75,11 +75,14 @@ module.exports = async (ctx: any) => {
     ios: `localhost`,
   };
 
-  const webpackConfig: webpack.Configuration = {
-    ...customWebpackConfig,
+  const webpackConfig = ([] as webpack.Configuration[]).concat(
+    customWebpackConfig,
+  );
+  webpackConfig[0] = {
+    ...webpackConfig[0],
     mode: 'development',
     plugins: [
-      ...(customWebpackConfig.plugins || []),
+      ...(webpackConfig[0].plugins || []),
       new WebpackInjectPlugin(() =>
         fs.readFileSync(path.join(__dirname, 'www/injectCSP.js'), 'utf8'),
       ),

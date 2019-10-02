@@ -41,7 +41,11 @@ module.exports = async (ctx: any) => {
   const customWebpackConfig = await createConfig(
     convertArgv(webpackArgv), // create webpack configuration from yargs.argv and webpack.config.js
   );
-  const compiler = webpack(customWebpackConfig);
+
+  const webpackConfig = ([] as webpack.Configuration[]).concat(
+    customWebpackConfig,
+  );
+  const compiler = webpack(webpackConfig);
   await new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) {

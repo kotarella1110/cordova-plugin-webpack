@@ -8,16 +8,30 @@ export const defaultHost = '0.0.0.0';
 export const defaultPort = 8080;
 
 export function createConfig(
-  config: webpack.Configuration | Promise<webpack.Configuration>,
-): Promise<webpack.Configuration>;
+  config:
+    | webpack.Configuration
+    | webpack.Configuration[]
+    | Promise<webpack.Configuration | webpack.Configuration[]>,
+): Promise<webpack.Configuration | webpack.Configuration[]>;
 
 export function createConfig<T>(
-  config: webpack.Configuration | Promise<webpack.Configuration>,
+  config:
+    | webpack.Configuration
+    | webpack.Configuration[]
+    | Promise<webpack.Configuration | webpack.Configuration[]>,
   argv: yargs.Argv<T>['argv'],
-): Promise<[webpack.Configuration, WebpackDevServer.Configuration]>;
+): Promise<
+  [
+    webpack.Configuration | webpack.Configuration[],
+    WebpackDevServer.Configuration,
+  ]
+>;
 
 export async function createConfig<T>(
-  config: webpack.Configuration | Promise<webpack.Configuration>,
+  config:
+    | webpack.Configuration
+    | webpack.Configuration[]
+    | Promise<webpack.Configuration | webpack.Configuration[]>,
   argv?: yargs.Argv<T>['argv'],
 ) {
   if (is.promise(config)) {

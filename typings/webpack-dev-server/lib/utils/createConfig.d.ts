@@ -1,10 +1,10 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import yargs from 'yargs';
+import { Arguments } from 'yargs';
 
 declare function createConfig<T>(
   config: webpack.Configuration | webpack.Configuration[],
-  argv: yargs.Arguments<T>,
+  argv: Arguments<T>,
   opts: { port: number },
 ): WebpackDevServer.Configuration;
 

@@ -1,4 +1,4 @@
-import yargs from 'yargs';
+import { Arguments } from 'yargs';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import createDevServerConfig from 'webpack-dev-server/lib/utils/createConfig';
@@ -19,7 +19,7 @@ export function createConfig<T>(
     | webpack.Configuration
     | webpack.Configuration[]
     | Promise<webpack.Configuration | webpack.Configuration[]>,
-  argv: yargs.Argv<T>['argv'],
+  argv: Arguments<T>,
 ): Promise<
   [
     webpack.Configuration | webpack.Configuration[],
@@ -32,7 +32,7 @@ export async function createConfig<T>(
     | webpack.Configuration
     | webpack.Configuration[]
     | Promise<webpack.Configuration | webpack.Configuration[]>,
-  argv?: yargs.Argv<T>['argv'],
+  argv?: Arguments<T>,
 ) {
   if (is.promise(config)) {
     if (argv) {

@@ -1,4 +1,4 @@
-import yargs from 'yargs';
+import { Arguments } from 'yargs';
 
 type Options = {
   alias?: { [key: string]: string | string[] };
@@ -7,7 +7,7 @@ type Options = {
 };
 
 declare function unparser<T extends object>(
-  argv: yargs.Arguments<T>,
+  argv: Arguments<T>,
   opts?: Options,
 ): ReadonlyArray<string>;
 

@@ -116,4 +116,14 @@ $RECYCLE.BIN/
 *.lnk
 
 
+### Project ###
 /src
+.vscode
+.eslintignore
+.eslintrc.js
+.gitignore
+commitlint.config.js
+jest.config.js
+ranovate.json
+tsconfig.json
+webpack.config.ts

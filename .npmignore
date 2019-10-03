@@ -124,6 +124,6 @@ $RECYCLE.BIN/
 .gitignore
 commitlint.config.js
 jest.config.js
-ranovate.json
+renovate.json
 tsconfig.json
 webpack.config.ts

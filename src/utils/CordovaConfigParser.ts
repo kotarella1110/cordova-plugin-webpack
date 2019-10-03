@@ -1,4 +1,3 @@
-import 'source-map-support/register';
 import { ConfigParser } from 'cordova-common';
 import et from 'elementtree';
 

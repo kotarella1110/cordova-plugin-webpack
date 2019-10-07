@@ -12,17 +12,18 @@ import is from '@sindresorhus/is';
 import express from 'express';
 import createHTML from 'create-html';
 import { choosePort, prepareUrls } from 'react-dev-utils/WebpackDevServerUtils';
+import { Context } from './types';
 import options from './options';
 import { defaultHost, defaultPort, createConfig } from './utils/webpackHelpers';
 import { createArguments, getVersion } from './utils/yargsHelpers';
 import CordovaConfigParser from './utils/CordovaConfigParser';
 
-module.exports = async (ctx: any) => {
+module.exports = async (ctx: Context) => {
   const platforms = ['browser', 'android', 'ios'] as const;
   const targetPlatforms = platforms.filter(platform =>
-    ctx.opts.platforms.includes(platform),
+    ctx.opts.platforms!.includes(platform),
   );
-  if (!platforms.some(platform => ctx.opts.platforms.includes(platform))) {
+  if (!platforms.some(platform => ctx.opts.platforms!.includes(platform))) {
     return;
   }
 
@@ -34,7 +35,9 @@ module.exports = async (ctx: any) => {
   const pluginArgv = pluginYargs
     .options(options.plugin) // set cordova-plugin-webpack options
     .version(
-      `${ctx.opts.plugin.pluginInfo.id} ${ctx.opts.plugin.pluginInfo.version}`,
+      `${ctx.opts.plugin!.pluginInfo.id} ${
+        ctx.opts.plugin!.pluginInfo.version
+      }`,
     ).argv;
 
   if (!pluginArgv.livereload) {

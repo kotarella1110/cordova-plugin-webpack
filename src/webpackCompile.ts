@@ -4,13 +4,14 @@ import yargsUnparser from 'yargs-unparser';
 import webpack from 'webpack';
 import convertArgv from 'webpack-cli/bin/utils/convert-argv';
 import is from '@sindresorhus/is';
+import { Context } from './types';
 import options from './options';
 import { createConfig } from './utils/webpackHelpers';
 import { createArguments, getVersion } from './utils/yargsHelpers';
 
-module.exports = async (ctx: any) => {
+module.exports = async (ctx: Context) => {
   const platforms = ['browser', 'android', 'ios'] as const;
-  if (!platforms.some(platform => ctx.opts.platforms.includes(platform))) {
+  if (!platforms.some(platform => ctx.opts.platforms!.includes(platform))) {
     return;
   }
 
@@ -22,7 +23,9 @@ module.exports = async (ctx: any) => {
   const pluginArgv = pluginYargs
     .options(options.plugin) // set cordova-plugin-webpack options
     .version(
-      `${ctx.opts.plugin.pluginInfo.id} ${ctx.opts.plugin.pluginInfo.version}`,
+      `${ctx.opts.plugin!.pluginInfo.id} ${
+        ctx.opts.plugin!.pluginInfo.version
+      }`,
     ).argv;
 
   if (pluginArgv.livereload) {

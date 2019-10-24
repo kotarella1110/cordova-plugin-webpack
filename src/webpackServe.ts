@@ -16,7 +16,7 @@ import { Context } from './types';
 import options from './options';
 import { defaultHost, defaultPort, createConfig } from './utils/webpackHelpers';
 import { createArguments, getVersion } from './utils/yargsHelpers';
-import CordovaConfigParser from './utils/CordovaConfigParser';
+import ConfigParser from './utils/ConfigParser';
 
 module.exports = async (ctx: Context) => {
   const platforms = ['browser', 'android', 'ios'] as const;
@@ -150,11 +150,11 @@ module.exports = async (ctx: Context) => {
         path.join(ctx.opts.projectRoot, 'platforms', platform, '**/config.xml'),
       )
       .forEach(configXmlPath => {
-        const configXml = new CordovaConfigParser(configXmlPath);
-        configXml.setContent(
-          `${protocol}://${urls.lanUrlForConfig ||
+        const configXml = new ConfigParser(configXmlPath);
+        configXml.setElement('content', {
+          src: `${protocol}://${urls.lanUrlForConfig ||
             defaultAccessHost[platform]}:${port}`,
-        );
+        });
         if (platform === 'ios') {
           configXml.setElement('allow-navigation', { href: '*' });
         }

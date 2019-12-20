@@ -1,3 +1,7 @@
+See [1.0.0 Roadmap](https://github.com/kotarella1110/cordova-plugin-webpack/issues/23) ([v1 branch](https://github.com/kotarella1110/cordova-plugin-webpack/tree/v1)). Feedback is welcome 🙏
+
+---
+
 # cordova-plugin-webpack
 
 [![npm version](https://badge.fury.io/js/cordova-plugin-webpack.svg)](https://badge.fury.io/js/cordova-plugin-webpack)

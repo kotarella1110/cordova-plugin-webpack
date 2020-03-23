@@ -1,7 +1,3 @@
-See [1.0.0 Roadmap](https://github.com/kotarella1110/cordova-plugin-webpack/issues/23) ([v1 branch](https://github.com/kotarella1110/cordova-plugin-webpack/tree/v1)). Feedback is welcome 🙏
-
----
-
 # cordova-plugin-webpack
 
 [![npm version](https://badge.fury.io/js/cordova-plugin-webpack.svg)](https://badge.fury.io/js/cordova-plugin-webpack)
@@ -38,6 +34,7 @@ Simply install this plugin to easily integrate webpack into your Cordova workflo
 ## Installation
 
 ```shell
+$ npm install -D webpack@4 webpack-cli@3 webpack-dev-server@3
 $ cordova plugin add cordova-plugin-webpack
 ```
 
@@ -47,12 +44,12 @@ $ cordova plugin add cordova-plugin-webpack
 
 ```shell
 $ cordova { prepare | platform add | build | run } [<platform> [...]]
-    [-- [--webpackConfig <webpackConfig> | --livereload]]
+    [-- [--webpack.<option> <value> | --livereload]]
 ```
 
 | Option | Description | Default | Aliases |
 |--------|-------------|---------|---------|
-| `--webpackConfig` | Path to a webpack configuration file | `webpack.config.js` or `webpackfile.js` in your project root directory. | `-w` |
+| `--webpack.<option>` | Passed to [webpack-cli options](https://webpack.js.org/api/cli/) or [webpack-dev-server options](https://webpack.js.org/configuration/dev-server/). eg: `--webpack.config example.config.js` | `-w` |
 | `--livereload` | Enables LiveReload (HMR) | `false` | `-l` |
 
 ### Examples
@@ -63,7 +60,9 @@ $ cordova { prepare | platform add | build | run } [<platform> [...]]
 
 ```shell
 $ cordova prepare
-$ cordova build -- --webpackConfig path/to/dir/webpack.config.js
+$ cordova build -- --webpack.config path/to/dir/webpack.config.js
+$ cordova build android -- --webpack.mode=production
+$ cordova build ios -- --webpack.env.prod
 ```
 
 #### Live Reload (HMR)
@@ -72,7 +71,8 @@ $ cordova build -- --webpackConfig path/to/dir/webpack.config.js
 
 ```shell
 $ cordova prepare -- --livereload
-$ cordova run -- -w path/to/dir/webpack.config.babel.js -l
+$ cordova run ios -- -w.config path/to/dir/webpack.config.babel.js -l
+$ cordova run android -- --livereload --webpack.port=8888 --webpack.watch-content-base=false
 ```
 
 ## Usage

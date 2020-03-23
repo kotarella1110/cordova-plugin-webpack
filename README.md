@@ -18,7 +18,7 @@ Simply install this plugin to easily integrate webpack into your Cordova workflo
 
 ## Demo
 
-![Demo](./media/cordova-plugin-webpack-demo.gif)
+![Demo](https://github.com/kotarella1110/cordova-plugin-webpack/blob/master/media/cordova-plugin-webpack-demo.gif?raw=true)
 
 ## Features
 

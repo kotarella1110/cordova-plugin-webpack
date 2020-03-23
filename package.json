@@ -2,6 +2,9 @@
   "name": "cordova-plugin-webpack",
   "version": "1.0.0-alpha.2",
   "description": "Cordova Webpack Plugin",
+  "files": [
+    "scripts"
+  ],
   "cordova": {
     "id": "cordova-plugin-webpack",
     "platforms": [

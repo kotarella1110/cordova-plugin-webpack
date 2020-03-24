@@ -125,3 +125,4 @@ $RECYCLE.BIN/
 
 /dist
 !bin
+.envrc

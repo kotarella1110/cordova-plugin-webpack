@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "Cordova Webpack Plugin",
   "files": [
-    "dist"
+    "dist",
+    "plugin.xml"
   ],
   "cordova": {
     "id": "cordova-plugin-webpack",
     "platforms": [
       "android",
-      "ios"
+      "ios",
+      "browser"
     ]
   },
   "scripts": {

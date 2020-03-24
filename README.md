@@ -240,6 +240,27 @@ module.exports = {
 
 Contributions are always welcome! Please read the [contributing](./CONTRIBUTING.md) first.
 
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://qiita.com/kotarella1110"><img src="https://avatars1.githubusercontent.com/u/12913947?v=4" width="100px;" alt=""/><br /><sub><b>Kotaro Sugawara</b></sub></a><br /><a href="https://github.com/kotarella1110/cordova-plugin-webpack/commits?author=kotarella1110" title="Code">💻</a> <a href="https://github.com/kotarella1110/cordova-plugin-webpack/commits?author=kotarella1110" title="Documentation">📖</a> <a href="#ideas-kotarella1110" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-kotarella1110" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/kotarella1110/cordova-plugin-webpack/commits?author=kotarella1110" title="Tests">⚠️</a></td>
+    <td align="center"><a href="http://jimmymultani.com"><img src="https://avatars0.githubusercontent.com/u/1281284?v=4" width="100px;" alt=""/><br /><sub><b>Jimmy Multani</b></sub></a><br /><a href="https://github.com/kotarella1110/cordova-plugin-webpack/commits?author=JimmyMultani" title="Documentation">📖</a> <a href="https://github.com/kotarella1110/cordova-plugin-webpack/commits?author=JimmyMultani" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
 ## License
 
 [Apache-2.0](./LICENSE) © [Kotaro Sugawara](https://twitter.com/kotarella1110)

@@ -49,7 +49,7 @@ $ cordova { prepare | platform add | build | run } [<platform> [...]]
 
 | Option | Description | Default | Aliases |
 |--------|-------------|---------|---------|
-| `--webpack.<option>` | Passed to [webpack-cli options](https://webpack.js.org/api/cli/) or [webpack-dev-server options](https://webpack.js.org/configuration/dev-server/). eg: `--webpack.config example.config.js` | `-w` |
+| `--webpack.<option>` | Passed to [webpack-cli options](https://webpack.js.org/api/cli/) or [webpack-dev-server options](https://webpack.js.org/configuration/dev-server/). eg: `--webpack.config example.config.js` <br> **Note: Some options such as [Stats Options](https://webpack.js.org/api/cli/#stats-options) and [Watch Options](https://webpack.js.org/api/cli/#watch-options) are not yet supported.** | `-w` |
 | `--livereload` | Enables LiveReload (HMR) | `false` | `-l` |
 
 ### Examples

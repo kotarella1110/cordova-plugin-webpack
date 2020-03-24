@@ -1,7 +1,3 @@
-See [1.0.0 Roadmap](https://github.com/kotarella1110/cordova-plugin-webpack/issues/23) ([v1 branch](https://github.com/kotarella1110/cordova-plugin-webpack/tree/v1)). Feedback is welcome 🙏
-
----
-
 # cordova-plugin-webpack
 
 [![npm version](https://badge.fury.io/js/cordova-plugin-webpack.svg)](https://badge.fury.io/js/cordova-plugin-webpack)
@@ -22,7 +18,7 @@ Simply install this plugin to easily integrate webpack into your Cordova workflo
 
 ## Demo
 
-![Demo](./media/cordova-plugin-webpack-demo.gif)
+![Demo](https://github.com/kotarella1110/cordova-plugin-webpack/blob/master/media/cordova-plugin-webpack-demo.gif?raw=true)
 
 ## Features
 
@@ -38,6 +34,7 @@ Simply install this plugin to easily integrate webpack into your Cordova workflo
 ## Installation
 
 ```shell
+$ npm install -D webpack@4 webpack-cli@3 webpack-dev-server@3
 $ cordova plugin add cordova-plugin-webpack
 ```
 
@@ -47,12 +44,12 @@ $ cordova plugin add cordova-plugin-webpack
 
 ```shell
 $ cordova { prepare | platform add | build | run } [<platform> [...]]
-    [-- [--webpackConfig <webpackConfig> | --livereload]]
+    [-- [--webpack.<option> <value> | --livereload]]
 ```
 
 | Option | Description | Default | Aliases |
 |--------|-------------|---------|---------|
-| `--webpackConfig` | Path to a webpack configuration file | `webpack.config.js` or `webpackfile.js` in your project root directory. | `-w` |
+| `--webpack.<option>` | Passed to [webpack-cli options](https://webpack.js.org/api/cli/) or [webpack-dev-server options](https://webpack.js.org/configuration/dev-server/). eg: `--webpack.config example.config.js` <br> **Note: Some options such as [Stats Options](https://webpack.js.org/api/cli/#stats-options) and [Watch Options](https://webpack.js.org/api/cli/#watch-options) are not yet supported.** | `-w` |
 | `--livereload` | Enables LiveReload (HMR) | `false` | `-l` |
 
 ### Examples
@@ -63,7 +60,9 @@ $ cordova { prepare | platform add | build | run } [<platform> [...]]
 
 ```shell
 $ cordova prepare
-$ cordova build -- --webpackConfig path/to/dir/webpack.config.js
+$ cordova build -- --webpack.config path/to/dir/webpack.config.js
+$ cordova build android -- --webpack.mode=production
+$ cordova build ios -- --webpack.env.prod
 ```
 
 #### Live Reload (HMR)
@@ -72,7 +71,8 @@ $ cordova build -- --webpackConfig path/to/dir/webpack.config.js
 
 ```shell
 $ cordova prepare -- --livereload
-$ cordova run -- -w path/to/dir/webpack.config.babel.js -l
+$ cordova run ios -- -w.config path/to/dir/webpack.config.babel.js -l
+$ cordova run android -- --livereload --webpack.port=8888 --webpack.watch-content-base=false
 ```
 
 ## Usage
@@ -239,6 +239,27 @@ module.exports = {
 ## Contribute
 
 Contributions are always welcome! Please read the [contributing](./CONTRIBUTING.md) first.
+
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://qiita.com/kotarella1110"><img src="https://avatars1.githubusercontent.com/u/12913947?v=4" width="100px;" alt=""/><br /><sub><b>Kotaro Sugawara</b></sub></a><br /><a href="https://github.com/kotarella1110/cordova-plugin-webpack/commits?author=kotarella1110" title="Code">💻</a> <a href="https://github.com/kotarella1110/cordova-plugin-webpack/commits?author=kotarella1110" title="Documentation">📖</a> <a href="#ideas-kotarella1110" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-kotarella1110" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/kotarella1110/cordova-plugin-webpack/commits?author=kotarella1110" title="Tests">⚠️</a></td>
+    <td align="center"><a href="http://jimmymultani.com"><img src="https://avatars0.githubusercontent.com/u/1281284?v=4" width="100px;" alt=""/><br /><sub><b>Jimmy Multani</b></sub></a><br /><a href="https://github.com/kotarella1110/cordova-plugin-webpack/commits?author=JimmyMultani" title="Documentation">📖</a> <a href="https://github.com/kotarella1110/cordova-plugin-webpack/commits?author=JimmyMultani" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## License
 

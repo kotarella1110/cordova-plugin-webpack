@@ -11,7 +11,7 @@ const config: webpack.Configuration = {
   },
   output: {
     filename: '[name].js',
-    path: path.join(__dirname, 'scripts/www'),
+    path: path.join(__dirname, 'dist/www'),
   },
   devtool: 'eval-source-map',
   resolve: {

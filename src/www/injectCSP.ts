@@ -17,4 +17,4 @@ policy.add('default-src', '*');
 policyEl.setAttribute('content', policy.toString());
 document.head.appendChild(policyEl);
 
-console.log(`Set Content Security Policy:`, policy.toString());
+console.log('Set Content Security Policy:', policy.toString());

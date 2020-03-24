@@ -5,13 +5,14 @@ import webpack from 'webpack';
 import convertArgv from 'webpack-cli/bin/utils/convert-argv';
 import is from '@sindresorhus/is';
 import { Context } from './types';
+// eslint-disable-next-line import/no-named-as-default
 import options from './options';
 import { createConfig } from './utils/webpackHelpers';
 import { createArguments, getVersion } from './utils/yargsHelpers';
 
 module.exports = async (ctx: Context) => {
   const platforms = ['browser', 'android', 'ios'] as const;
-  if (!platforms.some(platform => ctx.opts.platforms!.includes(platform))) {
+  if (!platforms.some((platform) => ctx.opts.platforms!.includes(platform))) {
     return;
   }
 

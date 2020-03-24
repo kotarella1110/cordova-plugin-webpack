@@ -13,6 +13,7 @@ import express from 'express';
 import createHTML from 'create-html';
 import { choosePort, prepareUrls } from 'react-dev-utils/WebpackDevServerUtils';
 import { Context } from './types';
+// eslint-disable-next-line import/no-named-as-default
 import options from './options';
 import { defaultHost, defaultPort, createConfig } from './utils/webpackHelpers';
 import { createArguments, getVersion } from './utils/yargsHelpers';
@@ -20,10 +21,10 @@ import ConfigParser from './utils/ConfigParser';
 
 module.exports = async (ctx: Context) => {
   const platforms = ['browser', 'android', 'ios'] as const;
-  const targetPlatforms = platforms.filter(platform =>
+  const targetPlatforms = platforms.filter((platform) =>
     ctx.opts.platforms!.includes(platform),
   );
-  if (!platforms.some(platform => ctx.opts.platforms!.includes(platform))) {
+  if (!platforms.some((platform) => ctx.opts.platforms!.includes(platform))) {
     return;
   }
 
@@ -74,8 +75,8 @@ module.exports = async (ctx: Context) => {
   }
   const urls = prepareUrls(protocol, host, port);
   const defaultAccessHost = {
-    android: `10.0.2.2`,
-    ios: `localhost`,
+    android: '10.0.2.2',
+    ios: 'localhost',
   };
 
   const webpackConfig = ([] as webpack.Configuration[]).concat(
@@ -105,11 +106,11 @@ module.exports = async (ctx: Context) => {
     ...customDevServerConfig,
     host,
     port,
-    before: (app, server) => {
+    before: (app, server, compiler) => {
       if (customDevServerConfig.before) {
-        customDevServerConfig.before(app, server);
+        customDevServerConfig.before(app, server, compiler);
       }
-      targetPlatforms.forEach(platform => {
+      targetPlatforms.forEach((platform) => {
         app.use(
           `/${platform}`,
           express.static(
@@ -129,7 +130,7 @@ module.exports = async (ctx: Context) => {
   if (devServerConfig.hot)
     WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerConfig);
 
-  targetPlatforms.forEach(platform => {
+  targetPlatforms.forEach((platform) => {
     if (platform === 'browser') {
       const html = createHTML({
         head: `<meta http-equiv="refresh" content="0;URL=${urls.localUrlForBrowser}">`,
@@ -149,11 +150,12 @@ module.exports = async (ctx: Context) => {
       .sync(
         path.join(ctx.opts.projectRoot, 'platforms', platform, '**/config.xml'),
       )
-      .forEach(configXmlPath => {
+      .forEach((configXmlPath) => {
         const configXml = new ConfigParser(configXmlPath);
         configXml.setElement('content', {
-          src: `${protocol}://${urls.lanUrlForConfig ||
-            defaultAccessHost[platform]}:${port}`,
+          src: `${protocol}://${
+            urls.lanUrlForConfig || defaultAccessHost[platform]
+          }:${port}`,
         });
         if (platform === 'ios') {
           configXml.setElement('allow-navigation', { href: '*' });
@@ -166,7 +168,7 @@ module.exports = async (ctx: Context) => {
   const server = new WebpackDevServer(compiler, devServerConfig);
 
   const signals = ['SIGINT', 'SIGTERM'] as const;
-  signals.forEach(signal => {
+  signals.forEach((signal) => {
     process.on(signal, () => {
       server.close();
       process.exit();
@@ -174,7 +176,7 @@ module.exports = async (ctx: Context) => {
   });
 
   await new Promise((resolve, reject) => {
-    server.listen(port, host, err => {
+    server.listen(port, host, (err) => {
       if (err) {
         reject(err);
       }

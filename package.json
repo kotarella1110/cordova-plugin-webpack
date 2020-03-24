@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.2",
   "description": "Cordova Webpack Plugin",
   "files": [
-    "scripts"
+    "dist"
   ],
   "cordova": {
     "id": "cordova-plugin-webpack",
@@ -16,7 +16,7 @@
     "upgrade-interactive": "npm-check --update",
     "precommit": "lint-staged",
     "prepare": "npm run build",
-    "build": "rimraf scripts/* && tsc && webpack",
+    "build": "rimraf dist/* && tsc && webpack",
     "lint": "eslint '**/*.{js,ts}'",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest --watch",

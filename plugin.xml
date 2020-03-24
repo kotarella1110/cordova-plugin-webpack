@@ -5,7 +5,7 @@
   <author>Kotaro Sugawara</author>
   <keywords>cordova,webpack</keywords>
   <license>Apache 2.0</license>
-  <hook src="scripts/peerDepsInstalledCheck.js" type="before_plugin_install"/>
-  <hook src="scripts/webpackCompile.js" type="before_prepare"/>
-  <hook src="scripts/webpackServe.js" type="after_prepare"/>
+  <hook src="dist/peerDepsInstalledCheck.js" type="before_plugin_install"/>
+  <hook src="dist/webpackCompile.js" type="before_prepare"/>
+  <hook src="dist/webpackServe.js" type="after_prepare"/>
 </plugin>

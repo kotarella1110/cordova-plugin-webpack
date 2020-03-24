@@ -123,5 +123,5 @@ $RECYCLE.BIN/
 *.lnk
 
 
-/scripts
+/dist
 !bin

@@ -3,7 +3,7 @@
     "target": "es5",
     "module": "commonjs",
     "allowJs": true,
-    "outDir": "scripts",
+    "outDir": "dist",
     "removeComments": true,
     "strict": true,
     "noUnusedLocals": true,

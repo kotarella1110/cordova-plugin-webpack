@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/kotarella1110/cordova-plugin-webpack/issues)
 
-This plugin integrates [webpack](https://webpack.js.org "webpack") into your Cordova workflow.
+This plugin integrates [webpack](https://webpack.js.org 'webpack') into your Cordova workflow.
 
 ## Motivation
 
@@ -22,14 +22,14 @@ Simply install this plugin to easily integrate webpack into your Cordova workflo
 
 ## Features
 
-* Ability to have build scripts by webpack when you build or run Cordova app
-* Ability to have LiveReload ([Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement "Hot Module Replacement | webpack")) run by Webpack Dev Server when you’re testing on a device or emulator for Android and iOS
+- Ability to have build scripts by webpack when you build or run Cordova app
+- Ability to have LiveReload ([Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement 'Hot Module Replacement | webpack')) run by Webpack Dev Server when you’re testing on a device or emulator for Android and iOS
 
 ## Supported Platforms
 
-* Browser
-* Android
-* iOS
+- Browser
+- Android
+- iOS
 
 ## Installation
 
@@ -47,10 +47,10 @@ $ cordova { prepare | platform add | build | run } [<platform> [...]]
     [-- [--webpack.<option> <value> | --livereload]]
 ```
 
-| Option | Description | Default | Aliases |
-|--------|-------------|---------|---------|
-| `--webpack.<option>` | Passed to [webpack-cli options](https://webpack.js.org/api/cli/) or [webpack-dev-server options](https://webpack.js.org/configuration/dev-server/). eg: `--webpack.config example.config.js` <br> **Note: Some options such as [Stats Options](https://webpack.js.org/api/cli/#stats-options) and [Watch Options](https://webpack.js.org/api/cli/#watch-options) are not yet supported.** | | `-w` |
-| `--livereload` | Enables LiveReload (HMR) | `false` | `-l` |
+| Option               | Description                                                                                                                                                                                                                                                                                                                                                                               | Default | Aliases |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ------- |
+| `--webpack.<option>` | Passed to [webpack-cli options](https://webpack.js.org/api/cli/) or [webpack-dev-server options](https://webpack.js.org/configuration/dev-server/). eg: `--webpack.config example.config.js` <br> **Note: Some options such as [Stats Options](https://webpack.js.org/api/cli/#stats-options) and [Watch Options](https://webpack.js.org/api/cli/#watch-options) are not yet supported.** |         | `-w`    |
+| `--livereload`       | Enables LiveReload (HMR)                                                                                                                                                                                                                                                                                                                                                                  | `false` | `-l`    |
 
 ### Examples
 
@@ -81,81 +81,81 @@ $ cordova run android -- --livereload --webpack.port=8888 --webpack.watch-conten
 
 2. Create a webpack configuration file (`webpack.config.js`) in your project root folder
 
-    ```js
-    const path = require('path');
+   ```js
+   const path = require('path');
 
-    module.exports = {
-      mode: 'development',
-      entry: './src/index.js',
-      output: {
-        path: path.resolve(__dirname, 'www'),
-        filename: 'index.bundle.js',
-      },
-      devtool: 'inline-source-map',
-    };
-    ```
+   module.exports = {
+     mode: 'development',
+     entry: './src/index.js',
+     output: {
+       path: path.resolve(__dirname, 'www'),
+       filename: 'index.bundle.js',
+     },
+     devtool: 'inline-source-map',
+   };
+   ```
 
 3. Execute the commands
 
-    ```shell
-    $ cordova build
-    $ cordova run -- --livereload
-    ```
+   ```shell
+   $ cordova build
+   $ cordova run -- --livereload
+   ```
 
 <details>
 <summary>For more information...</summary>
 
 1. Create a Cordova app
 
-    ```shell
-    $ cordova create cordova-plugin-webpack-example cordova.plugin.webpack.example CordovaPluginWebpackExample
-    ```
+   ```shell
+   $ cordova create cordova-plugin-webpack-example cordova.plugin.webpack.example CordovaPluginWebpackExample
+   ```
 
 2. Add platforms
 
-    ```shell
-    $ cd cordova-plugin-webpack-example
-    $ cordova platform add android ios
-    ```
+   ```shell
+   $ cd cordova-plugin-webpack-example
+   $ cordova platform add android ios
+   ```
 
 3. [Add this plugin](#Installation)
 
-4. Create a JavaScript file ([entry point](https://webpack.js.org/concepts/entry-points/ "entry points"))
+4. Create a JavaScript file ([entry point](https://webpack.js.org/concepts/entry-points/ 'entry points'))
 
-    ```shell
-    $ mkdir src
-    $ mv www/js/index.js src/index.js
-    ```
+   ```shell
+   $ mkdir src
+   $ mv www/js/index.js src/index.js
+   ```
 
 5. Create a webpack configuration file (`webpack.config.js`) in your project root folder
 
-    ```js
-    const path = require('path');
+   ```js
+   const path = require('path');
 
-    module.exports = {
-      mode: 'development',
-      entry: './src/index.js',
-      output: {
-        path: path.resolve(__dirname, 'www'),
-        filename: 'index.bundle.js',
-      },
-      devtool: 'inline-source-map',
-    };
-    ```
+   module.exports = {
+     mode: 'development',
+     entry: './src/index.js',
+     output: {
+       path: path.resolve(__dirname, 'www'),
+       filename: 'index.bundle.js',
+     },
+     devtool: 'inline-source-map',
+   };
+   ```
 
 6. Fix a HTML file (`www/index.html`)
 
-    ```diff
-    -         <script type="text/javascript" src="js/index.js"></script>
-    +         <script type="text/javascript" src="index.bundle.js"></script>
-    ```
+   ```diff
+   -         <script type="text/javascript" src="js/index.js"></script>
+   +         <script type="text/javascript" src="index.bundle.js"></script>
+   ```
 
 7. Execute the commands
 
-    ```shell
-    $ cordova build
-    $ cordova run -- --livereload
-    ```
+   ```shell
+   $ cordova build
+   $ cordova run -- --livereload
+   ```
 
 </details>
 
@@ -169,19 +169,19 @@ To resolve this, you must modify your `config.xml` file to enable cleartext supp
 
 1. Add `xmlns:android="http://schemas.android.com/apk/res/android"` in `widget` root element
 
-    ```xml
-    <widget id="cordova.plugin.webpack.example" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    ```
+   ```xml
+   <widget id="cordova.plugin.webpack.example" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+   ```
 
 2. Enable `android:usesCleartextTraffic` attribute in `application` element
 
-    ```xml
-    <platform name="android">
-        <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
-            <application android:usesCleartextTraffic="true" />
-        </edit-config>
-    </platform>
-    ```
+   ```xml
+   <platform name="android">
+       <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application">
+           <application android:usesCleartextTraffic="true" />
+       </edit-config>
+   </platform>
+   ```
 
 ---
 
@@ -214,14 +214,14 @@ module.exports = {
 };
 ```
 
-| Option | Default |
-|--------|---------|
-| `devServer.contentBase`  | `www` |
-| `devServer.historyApiFallBack` | `true` |
-| `devServer.host` | `0.0.0.0` |
-| `devServer.port` | `8080` |
-| `devServer.watchContentBase` | `true` |
-| `devServer.hot` | `true` |
+| Option                         | Default   |
+| ------------------------------ | --------- |
+| `devServer.contentBase`        | `www`     |
+| `devServer.historyApiFallBack` | `true`    |
+| `devServer.host`               | `0.0.0.0` |
+| `devServer.port`               | `8080`    |
+| `devServer.watchContentBase`   | `true`    |
+| `devServer.hot`                | `true`    |
 
 For example, if you want page reloading (LiveReload) instead of hot module reloading (HMR), specify the `devServer.hot` option as `false`.
 
@@ -240,7 +240,6 @@ module.exports = {
 
 Contributions are always welcome! Please read the [contributing](./CONTRIBUTING.md) first.
 
-
 ## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -257,6 +256,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

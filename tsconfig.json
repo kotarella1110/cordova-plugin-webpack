@@ -13,19 +13,12 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "*": [
-        "typings/*"
-      ]
+      "*": ["typings/*"]
     },
-    "typeRoots": [
-      "./typings",
-      "./node_modules/@types"
-    ],
+    "typeRoots": ["./typings", "./node_modules/@types"],
     "sourceMap": true,
-    "resolveJsonModule":true,
+    "resolveJsonModule": true,
     "noErrorTruncation": true
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }

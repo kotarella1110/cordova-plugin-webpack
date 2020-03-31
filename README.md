@@ -1,14 +1,39 @@
-# cordova-plugin-webpack
+<h1 align="center">cordova-plugin-webpack</h1>
 
-[![npm version](https://badge.fury.io/js/cordova-plugin-webpack.svg)](https://badge.fury.io/js/cordova-plugin-webpack)
-[![Downloads](https://img.shields.io/npm/dm/cordova-plugin-webpack.svg)](https://www.npmjs.com/package/cordova-plugin-webpack)
-[![dependencies Status](https://david-dm.org/kotarella1110/cordova-plugin-webpack/status.svg)](https://david-dm.org/kotarella1110/cordova-plugin-webpack)
-[![devDependencies Status](https://david-dm.org/kotarella1110/cordova-plugin-webpack/dev-status.svg)](https://david-dm.org/kotarella1110/cordova-plugin-webpack?type=dev)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f51fd5b6e3c7f43649c2/maintainability)](https://codeclimate.com/github/kotarella1110/cordova-plugin-webpack/maintainability)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/kotarella1110/cordova-plugin-webpack/issues)
+<p align="center">This plugin integrates <a href="https://webpack.js.org">webpack</a> into your Cordova workflow.</p>
 
-This plugin integrates [webpack](https://webpack.js.org 'webpack') into your Cordova workflow.
+<p align="center">
+  <a href="LICENSE">
+    <img alt="License" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" />
+  </a>
+  <a href="https://www.npmjs.com/package/cordova-plugin-webpack">
+    <img alt="NPM Version" src="https://img.shields.io/npm/v/cordova-plugin-webpack?style=flat-square" />
+  </a>
+  <a href="https://www.npmjs.com/package/cordova-plugin-webpack">
+    <img alt="Downloads Month" src="https://img.shields.io/npm/dm/cordova-plugin-webpack?style=flat-square" />
+  </a>
+  <a href="https://www.npmjs.com/package/cordova-plugin-webpack">
+    <img alt="Downloads Total" src="https://img.shields.io/npm/dt/cordova-plugin-webpack?style=flat-square" />
+  </a>
+  <a href="https://david-dm.org/kotarella1110/cordova-plugin-webpack" title="dependencies status">
+    <img src="https://david-dm.org/kotarella1110/cordova-plugin-webpack/status.svg?style=flat-square"/>
+  </a>
+  <a href="https://david-dm.org/kotarella1110/cordova-plugin-webpack?type=dev" title="devDependencies status">
+    <img src="https://david-dm.org/kotarella1110/cordova-plugin-webpack/dev-status.svg?style=flat-square"/>
+  </a>
+  <a href="https://codeclimate.com/github/kotarella1110/cordova-plugin-webpack/maintainability">
+    <img src="https://api.codeclimate.com/v1/badges/f51fd5b6e3c7f43649c2/maintainability" />
+  </a>
+  <a href="http://commitizen.github.io/cz-cli/">
+    <img alt="Commitizen friendly" src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square" />
+  </a>
+  <a href="#contributors">
+    <img alt="All Contributors" src="https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square" />
+  </a>
+  <a href="CONTRIBUTING.md">
+    <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-green.svg?style=flat-square" />
+  </a>
+</p>
 
 ## Motivation
 

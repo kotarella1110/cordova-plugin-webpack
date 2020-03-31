@@ -12,7 +12,7 @@ import { createArguments, getVersion } from './utils/yargsHelpers';
 
 module.exports = async (ctx: Context) => {
   const platforms = ['browser', 'android', 'ios'] as const;
-  if (!platforms.some((platform) => ctx.opts.platforms!.includes(platform))) {
+  if (!platforms.some((platform) => ctx.opts.platforms && ctx.opts.platforms.includes(platform))) {
     return;
   }
 

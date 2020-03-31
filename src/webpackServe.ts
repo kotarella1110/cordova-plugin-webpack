@@ -24,7 +24,7 @@ module.exports = async (ctx: Context) => {
   const targetPlatforms = platforms.filter((platform) =>
     ctx.opts.platforms!.includes(platform),
   );
-  if (!platforms.some((platform) => ctx.opts.platforms!.includes(platform))) {
+  if (!platforms.some((platform) => ctx.opts.platforms && ctx.opts.platforms.includes(platform))) {
     return;
   }
 

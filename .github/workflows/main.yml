@@ -39,6 +39,10 @@ jobs:
       - name: Create webpack config - example
         run: 'echo "const path = require(\"path\"); module.exports = { mode: \"development\", entry: \"./src/index.js\", output: { path: path.resolve(__dirname, \"www\"), filename: \"index.bundle.js\" }, devtool: \"inline-source-map\" };" > webpack.config.js'
         working-directory: cordova-plugin-webpack-example
+      - name: Create entry file - example
+        run: |
+          mkdir src
+          mv www/js/index.js src/index.js
       - name: Build - example
         run: cordova build
         working-directory: cordova-plugin-webpack-example

@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies - plugin
         run: npm ci
         working-directory: cordova-plugin-webpack
-      - name: Lint for plugin - plugin
+      - name: Lint - plugin
         run: npm run lint
         working-directory: cordova-plugin-webpack
       - name: Build - plugin
@@ -34,7 +34,7 @@ jobs:
         run: npm install --save-dev webpack@4 webpack-cli@3 webpack-dev-server@3
         working-directory: cordova-plugin-webpack-example
       - name: Add cordova-plugin-webpack - example
-        run: cordova plugn add ../cordova-plugin-webpack
+        run: cordova plugin add ../cordova-plugin-webpack
         working-directory: cordova-plugin-webpack-example
       - name: Create webpack config - example
         run: 'echo "const path = require(\"path\"); module.exports = { mode: \"development\", entry: \"./src/index.js\", output: { path: path.resolve(__dirname, \"www\"), filename: \"index.bundle.js\" }, devtool: \"inline-source-map\" };" > webpack.config.js'

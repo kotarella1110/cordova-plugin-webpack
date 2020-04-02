@@ -51,3 +51,4 @@ jobs:
         uses: andstor/file-existence-action@v1
         with:
           files: does-not-exist.txt
+          allow_failure: true

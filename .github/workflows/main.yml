@@ -1,0 +1,54 @@
+name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: cordova-plugin-webpack
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install cordova
+        run: npm install -g cordova@9
+      - name: Install dependencies - plugin
+        run: npm ci
+        working-directory: cordova-plugin-webpack
+      - name: Lint - plugin
+        run: npm run lint
+        working-directory: cordova-plugin-webpack
+      - name: Build - plugin
+        run: npm run build
+        working-directory: cordova-plugin-webpack
+      - name: Create cordova example - example
+        run: cordova create cordova-plugin-webpack-example cordova.plugin.webpack.example CordovaPluginWebpackExample
+      - name: Add platform - example
+        run: cordova platform add browser
+        working-directory: cordova-plugin-webpack-example
+      - name: Install dependencies - example
+        run: npm install --save-dev webpack@4 webpack-cli@3 webpack-dev-server@3
+        working-directory: cordova-plugin-webpack-example
+      - name: Add cordova-plugin-webpack - example
+        run: cordova plugin add ../cordova-plugin-webpack
+        working-directory: cordova-plugin-webpack-example
+      - name: Create webpack config - example
+        run: 'echo "const path = require(\"path\"); module.exports = { mode: \"development\", entry: \"./src/index.js\", output: { path: path.resolve(__dirname, \"www\"), filename: \"index.bundle.js\" }, devtool: \"inline-source-map\" };" > webpack.config.js'
+        working-directory: cordova-plugin-webpack-example
+      - name: Create entry file - example
+        run: |
+          mkdir src
+          mv www/js/index.js src/index.js
+        working-directory: cordova-plugin-webpack-example
+      - name: Build - example
+        run: cordova build
+        working-directory: cordova-plugin-webpack-example
+      - name: Check bundle file existence - example
+        uses: andstor/file-existence-action@v1
+        with:
+          files: cordova-plugin-webpack-example/www/index.bundle.js
+          allow_failure: true

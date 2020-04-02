@@ -50,5 +50,5 @@ jobs:
       - name: Check bundle file existence - example
         uses: andstor/file-existence-action@v1
         with:
-          files: www/index.bundle.js
+          files: cordova-plugin-webpack-example/www/index.bundle.js
           allow_failure: true

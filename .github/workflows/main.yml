@@ -47,8 +47,8 @@ jobs:
       - name: Build - example
         run: cordova build
         working-directory: cordova-plugin-webpack-example
-      - name: Check bundle file existence
+      - name: Check bundle file existence - example
         uses: andstor/file-existence-action@v1
         with:
-          files: does-not-exist.txt
+          files: www/index.bundle.js
           allow_failure: true

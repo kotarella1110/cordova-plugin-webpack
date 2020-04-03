@@ -6,6 +6,9 @@
   <a href="LICENSE">
     <img alt="License" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" />
   </a>
+  <a href="https://github.com/kotarella1110/cordova-plugin-webpack/actions?query=workflow%3ACI">
+    <img alt="Actions Status" src="https://github.com/kotarella1110/cordova-plugin-webpack/workflows/CI/badge.svg">
+  </a>
   <a href="https://www.npmjs.com/package/cordova-plugin-webpack">
     <img alt="NPM Version" src="https://img.shields.io/npm/v/cordova-plugin-webpack?style=flat-square" />
   </a>
@@ -26,9 +29,6 @@
   </a>
   <a href="http://commitizen.github.io/cz-cli/">
     <img alt="Commitizen friendly" src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square" />
-  </a>
-  <a href="#contributors">
-    <img alt="All Contributors" src="https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square" />
   </a>
   <a href="CONTRIBUTING.md">
     <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-green.svg?style=flat-square" />

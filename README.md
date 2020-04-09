@@ -1,8 +1,15 @@
 <div align="center">
-  <img  src="https://github.com/kotarella1110/cordova-plugin-webpack/blob/master/media/logo/logo.png?raw=true" width="128" />
   <h1>cordova-plugin-webpack</h1>
 
-  <p>This plugin integrates <a href="https://webpack.js.org">webpack</a> into your Cordova workflow.</p>
+  <img src="https://github.com/kotarella1110/cordova-plugin-webpack/blob/master/media/logo/logo.png?raw=true" width="128" />
+
+  <h3>This plugin integrates <a href="https://webpack.js.org">webpack</a> into your Cordova workflow.</h3>
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   <p>
     <a href="LICENSE">

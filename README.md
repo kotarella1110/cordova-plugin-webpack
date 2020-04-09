@@ -1,5 +1,5 @@
 <div align="center">
-  <img  src="./media/logo/logo-128px.png" />
+  <img  src="https://github.com/kotarella1110/cordova-plugin-webpack/blob/master/media/logo/logo.png?raw=true" width="128" />
   <h1>cordova-plugin-webpack</h1>
 
   <p>This plugin integrates <a href="https://webpack.js.org">webpack</a> into your Cordova workflow.</p>
@@ -285,6 +285,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

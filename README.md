@@ -1,39 +1,42 @@
-<h1 align="center">cordova-plugin-webpack</h1>
+<div align="center">
+  <img  src="./media/logo/logo-128px.png" />
+  <h1>cordova-plugin-webpack</h1>
 
-<p align="center">This plugin integrates <a href="https://webpack.js.org">webpack</a> into your Cordova workflow.</p>
+  <p>This plugin integrates <a href="https://webpack.js.org">webpack</a> into your Cordova workflow.</p>
 
-<p align="center">
-  <a href="LICENSE">
-    <img alt="License" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" />
-  </a>
-  <a href="https://github.com/kotarella1110/cordova-plugin-webpack/actions?query=workflow%3ACI">
-    <img alt="Actions Status" src="https://github.com/kotarella1110/cordova-plugin-webpack/workflows/CI/badge.svg">
-  </a>
-  <a href="https://www.npmjs.com/package/cordova-plugin-webpack">
-    <img alt="NPM Version" src="https://img.shields.io/npm/v/cordova-plugin-webpack?style=flat-square" />
-  </a>
-  <a href="https://www.npmjs.com/package/cordova-plugin-webpack">
-    <img alt="Downloads Month" src="https://img.shields.io/npm/dm/cordova-plugin-webpack?style=flat-square" />
-  </a>
-  <a href="https://www.npmjs.com/package/cordova-plugin-webpack">
-    <img alt="Downloads Total" src="https://img.shields.io/npm/dt/cordova-plugin-webpack?style=flat-square" />
-  </a>
-  <a href="https://david-dm.org/kotarella1110/cordova-plugin-webpack" title="dependencies status">
-    <img src="https://david-dm.org/kotarella1110/cordova-plugin-webpack/status.svg?style=flat-square"/>
-  </a>
-  <a href="https://david-dm.org/kotarella1110/cordova-plugin-webpack?type=dev" title="devDependencies status">
-    <img src="https://david-dm.org/kotarella1110/cordova-plugin-webpack/dev-status.svg?style=flat-square"/>
-  </a>
-  <a href="https://codeclimate.com/github/kotarella1110/cordova-plugin-webpack/maintainability">
-    <img src="https://api.codeclimate.com/v1/badges/f51fd5b6e3c7f43649c2/maintainability" />
-  </a>
-  <a href="http://commitizen.github.io/cz-cli/">
-    <img alt="Commitizen friendly" src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square" />
-  </a>
-  <a href="CONTRIBUTING.md">
-    <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-green.svg?style=flat-square" />
-  </a>
-</p>
+  <p>
+    <a href="LICENSE">
+      <img alt="License" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" />
+    </a>
+    <a href="https://github.com/kotarella1110/cordova-plugin-webpack/actions?query=workflow%3ACI">
+      <img alt="Actions Status" src="https://github.com/kotarella1110/cordova-plugin-webpack/workflows/CI/badge.svg">
+    </a>
+    <a href="https://www.npmjs.com/package/cordova-plugin-webpack">
+      <img alt="NPM Version" src="https://img.shields.io/npm/v/cordova-plugin-webpack?style=flat-square" />
+    </a>
+    <a href="https://www.npmjs.com/package/cordova-plugin-webpack">
+      <img alt="Downloads Month" src="https://img.shields.io/npm/dm/cordova-plugin-webpack?style=flat-square" />
+    </a>
+    <a href="https://www.npmjs.com/package/cordova-plugin-webpack">
+      <img alt="Downloads Total" src="https://img.shields.io/npm/dt/cordova-plugin-webpack?style=flat-square" />
+    </a>
+    <a href="https://david-dm.org/kotarella1110/cordova-plugin-webpack" title="dependencies status">
+      <img src="https://david-dm.org/kotarella1110/cordova-plugin-webpack/status.svg?style=flat-square"/>
+    </a>
+    <a href="https://david-dm.org/kotarella1110/cordova-plugin-webpack?type=dev" title="devDependencies status">
+      <img src="https://david-dm.org/kotarella1110/cordova-plugin-webpack/dev-status.svg?style=flat-square"/>
+    </a>
+    <a href="https://codeclimate.com/github/kotarella1110/cordova-plugin-webpack/maintainability">
+      <img src="https://api.codeclimate.com/v1/badges/f51fd5b6e3c7f43649c2/maintainability" />
+    </a>
+    <a href="http://commitizen.github.io/cz-cli/">
+      <img alt="Commitizen friendly" src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square" />
+    </a>
+    <a href="CONTRIBUTING.md">
+      <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-green.svg?style=flat-square" />
+    </a>
+  </p>
+</div>
 
 ## Motivation
 

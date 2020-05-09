@@ -1,3 +1,15 @@
+## [1.0.3](https://github.com/kotarella1110/cordova-plugin-webpack/compare/v1.0.2...v1.0.3) (2020-05-09)
+
+### Bug Fixes
+
+- **deps:** bump @sindresorhus/is from 2.1.0 to 2.1.1 ([d6fdbaf](https://github.com/kotarella1110/cordova-plugin-webpack/commit/d6fdbaf085a0952c51cc2b0656bf1ad23ff54324))
+- **deps:** bump current-device from 0.10.0 to 0.10.1 ([09652d0](https://github.com/kotarella1110/cordova-plugin-webpack/commit/09652d07ad1b2560454787f0eef6615473044918))
+- **deps:** bump is-ua-webview from 1.0.1 to 1.0.2 ([ea2f037](https://github.com/kotarella1110/cordova-plugin-webpack/commit/ea2f037acf2b59f4c3b2ad812d9200792beb7d2c))
+- **deps:** bump is-ua-webview from 1.0.2 to 1.0.3 ([8b497ff](https://github.com/kotarella1110/cordova-plugin-webpack/commit/8b497ff7e7671e1ff0d5df7579cd962685ea2eb5))
+- **deps:** bump source-map-support from 0.5.16 to 0.5.17 ([87148f0](https://github.com/kotarella1110/cordova-plugin-webpack/commit/87148f0d2763df34b0511877f9d1f052a64899cf))
+- **deps:** bump source-map-support from 0.5.17 to 0.5.18 ([f90da63](https://github.com/kotarella1110/cordova-plugin-webpack/commit/f90da63003e65765882edadf5c1e03e4d6742267))
+- **deps:** bump source-map-support from 0.5.18 to 0.5.19 ([46afed7](https://github.com/kotarella1110/cordova-plugin-webpack/commit/46afed734f1a271b32a7ad7c4106284b0911176a))
+
 <a name="1.0.2"></a>
 
 ## [1.0.2](https://github.com/kotarella1110/cordova-plugin-webpack/compare/v1.0.1...v1.0.2) (2020-04-01)

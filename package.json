@@ -56,7 +56,7 @@
     "elementtree": "^0.1.7",
     "express": "^4.17.1",
     "glob": "^7.1.6",
-    "is-ua-webview": "^1.0.2",
+    "is-ua-webview": "^1.0.3",
     "react-dev-utils": "^10.2.1",
     "source-map-support": "^0.5.19",
     "supports-color": "^7.1.0",

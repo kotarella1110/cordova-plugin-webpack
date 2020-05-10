@@ -1,3 +1,9 @@
+## [1.0.4](https://github.com/kotarella1110/cordova-plugin-webpack/compare/v1.0.3...v1.0.4) (2020-05-10)
+
+### Bug Fixes
+
+- use absolute path to cordova script ([#137](https://github.com/kotarella1110/cordova-plugin-webpack/issues/137)) ([e457d0e](https://github.com/kotarella1110/cordova-plugin-webpack/commit/e457d0ed731b4ee0b62b93e1c047ae2223a604ef))
+
 ## [1.0.3](https://github.com/kotarella1110/cordova-plugin-webpack/compare/v1.0.2...v1.0.3) (2020-05-09)
 
 ### Bug Fixes

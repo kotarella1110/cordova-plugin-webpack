@@ -10,7 +10,7 @@ const injectCordovaScript = (platform: typeof platforms[number]) => {
 
   const scriptEl = document.createElement('script');
   scriptEl.setAttribute('type', 'text/javascript');
-  scriptEl.setAttribute('src', `${platform}/cordova.js`);
+  scriptEl.setAttribute('src', `/${platform}/cordova.js`);
   document.body.appendChild(scriptEl);
 
   console.log(`Injected cordova.js of ${platform} platform.`);

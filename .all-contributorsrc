@@ -42,6 +42,16 @@
         "doc",
         "design"
       ]
+    },
+    {
+      "login": "gavinhenderson",
+      "name": "Gavin Henderson",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1359202?v=4",
+      "profile": "http://gavinhenderson.me",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

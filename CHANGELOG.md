@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/kotarella1110/cordova-plugin-webpack/compare/v1.0.4...v1.0.5) (2020-05-17)
+
+### Bug Fixes
+
+- **deps:** bump is-ua-webview from 1.0.3 to 1.0.4 ([353af4c](https://github.com/kotarella1110/cordova-plugin-webpack/commit/353af4cd47dfd96180e3b3299db9dd70ffb4d6ae))
+- **deps:** bump is-ua-webview from 1.0.3 to 1.0.5 ([8cf8648](https://github.com/kotarella1110/cordova-plugin-webpack/commit/8cf8648d1b7d9007fc4209849d7131bdb03a02d2))
+
 ## [1.0.4](https://github.com/kotarella1110/cordova-plugin-webpack/compare/v1.0.3...v1.0.4) (2020-05-10)
 
 ### Bug Fixes

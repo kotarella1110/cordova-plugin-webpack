@@ -49,7 +49,7 @@
   },
   "homepage": "https://github.com/kotarella1110/cordova-plugin-webpack#readme",
   "dependencies": {
-    "@sindresorhus/is": "^3.1.0",
+    "@sindresorhus/is": "^3.1.1",
     "create-html": "^4.1.0",
     "csp-parse": "0.0.2",
     "current-device": "^0.10.1",

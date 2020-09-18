@@ -70,7 +70,7 @@
     "@commitlint/prompt-cli": "^11.0.0",
     "@types/elementtree": "^0.1.0",
     "@types/jest": "^26.0.14",
-    "@types/node": "^14.10.3",
+    "@types/node": "^14.11.1",
     "@types/react-dev-utils": "^9.0.4",
     "@types/supports-color": "^5.3.0",
     "@types/webpack": "^4.41.22",

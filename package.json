@@ -62,7 +62,7 @@
     "supports-color": "^7.2.0",
     "webpack-inject-plugin": "^1.5.4",
     "yargs": "^16.0.3",
-    "yargs-unparser": "^1.6.3"
+    "yargs-unparser": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",

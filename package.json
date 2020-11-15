@@ -61,7 +61,7 @@
     "source-map-support": "^0.5.19",
     "supports-color": "^7.2.0",
     "webpack-inject-plugin": "^1.5.4",
-    "yargs": "^16.1.0",
+    "yargs": "^16.1.1",
     "yargs-unparser": "^2.0.0"
   },
   "devDependencies": {

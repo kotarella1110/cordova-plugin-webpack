@@ -95,7 +95,7 @@
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^25.5.1",
-    "ts-loader": "^8.0.14",
+    "ts-loader": "^8.0.15",
     "ts-node": "^9.1.1",
     "typescript": "^3.9.7",
     "webpack": "^4.46.0",

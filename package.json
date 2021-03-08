@@ -75,7 +75,7 @@
     "@types/supports-color": "^7.2.0",
     "@types/webpack": "^4.41.26",
     "@types/webpack-dev-server": "^3.11.1",
-    "@types/yargs": "^15.0.11",
+    "@types/yargs": "^15.0.12",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "all-contributors-cli": "^6.20.0",
     "clean-webpack-plugin": "^3.0.0",

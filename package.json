@@ -73,7 +73,7 @@
     "@types/node": "^14.14.37",
     "@types/react-dev-utils": "^9.0.5",
     "@types/supports-color": "^7.2.1",
-    "@types/webpack": "^4.41.26",
+    "@types/webpack": "^5.0.0",
     "@types/webpack-dev-server": "^3.11.3",
     "@types/yargs": "^15.0.11",
     "@typescript-eslint/eslint-plugin": "^2.34.0",

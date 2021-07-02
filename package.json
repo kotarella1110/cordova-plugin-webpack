@@ -72,7 +72,7 @@
     "@types/jest": "^26.0.23",
     "@types/node": "^15.6.2",
     "@types/react-dev-utils": "^9.0.6",
-    "@types/supports-color": "^8.1.0",
+    "@types/supports-color": "^8.1.1",
     "@types/webpack": "^4.41.26",
     "@types/webpack-dev-server": "^3.11.5",
     "@types/yargs": "^15.0.11",

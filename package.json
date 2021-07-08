@@ -68,7 +68,7 @@
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@commitlint/prompt-cli": "^12.1.4",
-    "@types/elementtree": "^0.1.0",
+    "@types/elementtree": "^0.1.1",
     "@types/jest": "^26.0.24",
     "@types/node": "^15.6.2",
     "@types/react-dev-utils": "^9.0.7",

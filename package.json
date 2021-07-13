@@ -59,7 +59,7 @@
     "is-ua-webview": "^1.0.5",
     "react-dev-utils": "^11.0.4",
     "source-map-support": "^0.5.19",
-    "supports-color": "^8.1.1",
+    "supports-color": "^9.0.1",
     "webpack-inject-plugin": "^1.5.5",
     "yargs": "^16.2.0",
     "yargs-unparser": "^2.0.0"

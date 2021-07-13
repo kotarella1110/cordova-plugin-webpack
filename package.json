@@ -52,7 +52,7 @@
     "@sindresorhus/is": "^4.0.1",
     "create-html": "^4.1.0",
     "csp-parse": "0.0.2",
-    "current-device": "^0.10.1",
+    "current-device": "^0.10.2",
     "elementtree": "^0.1.7",
     "express": "^4.17.1",
     "glob": "^7.1.7",

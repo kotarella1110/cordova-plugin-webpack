@@ -51,3 +51,21 @@ export async function createConfig<T>(
 
   return config;
 }
+
+function isIpAddress(address: string) {
+  var match = address.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+  return (
+    match != null &&
+    parseInt(match[1], 10) <= 255 &&
+    parseInt(match[2], 10) <= 255 &&
+    parseInt(match[3], 10) <= 255 &&
+    parseInt(match[4], 10) <= 255
+  );
+}
+
+export function guessIpAddress(address: string) {
+  if (address !== '0.0.0.0' && isIpAddress(address)) {
+    return address;
+  }
+  return undefined;
+}

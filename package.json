@@ -65,7 +65,7 @@
     "yargs-unparser": "^2.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
+    "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^12.1.4",
     "@commitlint/prompt-cli": "^12.1.4",
     "@types/elementtree": "^0.1.1",

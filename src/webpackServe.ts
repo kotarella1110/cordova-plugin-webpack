@@ -15,7 +15,12 @@ import { choosePort, prepareUrls } from 'react-dev-utils/WebpackDevServerUtils';
 import { Context } from './types';
 // eslint-disable-next-line import/no-named-as-default
 import options from './options';
-import { defaultHost, defaultPort, createConfig } from './utils/webpackHelpers';
+import {
+  defaultHost,
+  defaultPort,
+  createConfig,
+  guessIpAddress,
+} from './utils/webpackHelpers';
 import { createArguments, getVersion } from './utils/yargsHelpers';
 import ConfigParser from './utils/ConfigParser';
 
@@ -154,7 +159,9 @@ module.exports = async (ctx: Context) => {
         const configXml = new ConfigParser(configXmlPath);
         configXml.setElement('content', {
           src: `${protocol}://${
-            urls.lanUrlForConfig || defaultAccessHost[platform]
+            guessIpAddress(host) ||
+            urls.lanUrlForConfig ||
+            defaultAccessHost[platform]
           }:${port}`,
         });
         if (platform === 'ios') {

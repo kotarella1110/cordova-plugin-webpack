@@ -153,9 +153,7 @@ module.exports = async (ctx: Context) => {
       .forEach((configXmlPath) => {
         const configXml = new ConfigParser(configXmlPath);
         configXml.setElement('content', {
-          src: `${protocol}://${
-            urls.lanUrlForConfig || defaultAccessHost[platform]
-          }:${port}`,
+          src: `${protocol}://${defaultAccessHost[platform]}:${port}`,
         });
         if (platform === 'ios') {
           configXml.setElement('allow-navigation', { href: '*' });

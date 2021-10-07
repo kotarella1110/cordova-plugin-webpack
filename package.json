@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stempora/cordova-plugin-webpack.git"
+    "url": "https://github.com/kotarella1110/cordova-plugin-webpack.git"
   },
   "keywords": [
     "cordova",
@@ -45,9 +45,9 @@
   "author": "Kotaro Sugawara",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/stempora/cordova-plugin-webpack/issues"
+    "url": "https://github.com/kotarella1110/cordova-plugin-webpack/issues"
   },
-  "homepage": "https://github.com/stempora/cordova-plugin-webpack#readme",
+  "homepage": "https://github.com/kotarella1110/cordova-plugin-webpack#readme",
   "dependencies": {
     "@sindresorhus/is": "^2.1.1",
     "create-html": "^4.1.0",
@@ -73,8 +73,8 @@
     "@types/node": "^12.12.34",
     "@types/react-dev-utils": "^9.0.4",
     "@types/supports-color": "^5.3.0",
-    "@types/webpack": "^4.41.13",
-    "@types/webpack-dev-server": "^3.10.1",
+    "@types/webpack": "^5.28.0",
+    "@types/webpack-dev-server": "^4.3.0",
     "@types/yargs": "^15.0.5",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "all-contributors-cli": "^6.14.2",
@@ -98,14 +98,14 @@
     "ts-loader": "^7.0.4",
     "ts-node": "^8.10.1",
     "typescript": "^3.9.2",
-    "webpack": "^5.0.0",
+    "webpack": "^5.57.1",
     "webpack-cli": "^4.9.0",
-    "webpack-dev-server": "^4.0.0"
+    "webpack-dev-server": "^4.3.1"
   },
   "peerDependencies": {
-    "webpack": "^5.0.0",
-    "webpack-cli": "^4.0.0",
-    "webpack-dev-server": "^4.0.0"
+    "webpack": "^5.57.1",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1"
   },
   "husky": {
     "hooks": {

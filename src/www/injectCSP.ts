@@ -16,5 +16,3 @@ const policy = new Policy(policyEl.getAttribute('content') as string);
 policy.add('default-src', '*');
 policyEl.setAttribute('content', policy.toString());
 document.head.appendChild(policyEl);
-
-console.log('Set Content Security Policy:', policy.toString());

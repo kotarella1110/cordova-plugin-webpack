@@ -12,8 +12,6 @@ const injectCordovaScript = (platform: typeof platforms[number]) => {
   scriptEl.setAttribute('type', 'text/javascript');
   scriptEl.setAttribute('src', `/${platform}/cordova.js`);
   document.body.appendChild(scriptEl);
-
-  console.log(`Injected cordova.js of ${platform} platform.`);
 };
 
 if (!isWebview(navigator.userAgent)) {

@@ -1,7 +1,6 @@
 import { Arguments } from 'yargs';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import createDevServerConfig from 'webpack-dev-server/lib/utils/createConfig';
 import is from '@sindresorhus/is';
 
 export const defaultHost = '0.0.0.0';
@@ -42,11 +41,7 @@ export async function createConfig<T>(
   }
 
   if (argv) {
-    const options = createDevServerConfig(config, argv, {
-      port: defaultPort,
-    });
-    // host localhost to 0.0.0.0
-    return [config, options];
+    return [config, { argv }];
   }
 
   return config;

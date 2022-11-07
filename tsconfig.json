@@ -18,7 +18,8 @@
     "typeRoots": ["./typings", "./node_modules/@types"],
     "sourceMap": true,
     "resolveJsonModule": true,
-    "noErrorTruncation": true
+    "noErrorTruncation": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"]
 }

@@ -2,12 +2,10 @@ import 'source-map-support/register';
 import yargs from 'yargs';
 import yargsUnparser from 'yargs-unparser';
 import webpack from 'webpack';
-import convertArgv from 'webpack-cli/bin/utils/convert-argv';
+import WebpackCLI from 'webpack-cli';
 import is from '@sindresorhus/is';
 import { Context } from './types';
-// eslint-disable-next-line import/no-named-as-default
-import options from './options';
-import { createConfig } from './utils/webpackHelpers';
+import { options } from './options';
 import { createArguments, getVersion } from './utils/yargsHelpers';
 
 module.exports = async (ctx: Context) => {
@@ -42,21 +40,21 @@ module.exports = async (ctx: Context) => {
     .options(options.webpack) // set webpack yargs options
     .version(getVersion()).argv;
 
-  const customWebpackConfig = await createConfig(
-    convertArgv(webpackArgv), // create webpack configuration from yargs.argv and webpack.config.js
-  );
+  const webpackcli = new WebpackCLI()
+
+  const customWebpackConfig = await webpackcli.loadConfig({ argv: webpackArgv })
 
   const webpackConfig = ([] as webpack.Configuration[]).concat(
-    customWebpackConfig,
+    customWebpackConfig.options,
   );
   const compiler = webpack(webpackConfig);
-  await new Promise((resolve, reject) => {
+  await new Promise<void>((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) {
         reject(err);
       }
       console.log(
-        stats.toString({
+        stats?.toString({
           chunks: false,
           colors: true,
         }),

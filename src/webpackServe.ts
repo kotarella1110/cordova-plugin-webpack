@@ -2,22 +2,67 @@ import 'source-map-support/register';
 import path from 'path';
 import fs from 'fs';
 import glob from 'glob';
+import url from 'url';
+import address from 'address';
 import yargs from 'yargs/yargs';
-import yargsUnparser from 'yargs-unparser';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import convertArgv from 'webpack-cli/bin/utils/convert-argv';
-import WebpackInjectPlugin from 'webpack-inject-plugin';
-import is from '@sindresorhus/is';
-import express from 'express';
+// import convertArgv from 'webpack-cli/bin/utils/convert-argv';
+import WebpackCLI from 'webpack-cli'
+import WebpackInjectPlugin from '@bpnetguy/webpack-inject-plugin';
 import createHTML from 'create-html';
-import { choosePort, prepareUrls } from 'react-dev-utils/WebpackDevServerUtils';
 import { Context } from './types';
 // eslint-disable-next-line import/no-named-as-default
 import options from './options';
-import { defaultHost, defaultPort, createConfig } from './utils/webpackHelpers';
-import { createArguments, getVersion } from './utils/yargsHelpers';
+import { defaultHost, defaultPort } from './utils/webpackHelpers';
 import ConfigParser from './utils/ConfigParser';
+
+function prepareUrls(protocol: string, host: string, port: number, pathname: string = '/') {
+  const formatUrl = (hostname: string) =>
+    url.format({
+      protocol,
+      hostname,
+      port,
+      pathname,
+    });
+
+  const isUnspecifiedHost = host === '0.0.0.0' || host === '::';
+  let prettyHost; let lanUrlForConfig; let lanUrlForTerminal;
+  if (isUnspecifiedHost) {
+    prettyHost = 'localhost';
+    try {
+      // This can only return an IPv4 address
+      lanUrlForConfig = address.ip();
+      if (lanUrlForConfig) {
+        // Check if the address is a private ip
+        // https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces
+        if (
+          /^10[.]|^172[.](1[6-9]|2[0-9]|3[0-1])[.]|^192[.]168[.]/.test(
+            lanUrlForConfig
+          )
+        ) {
+          // Address is private, format it for later use
+          lanUrlForTerminal = formatUrl(lanUrlForConfig);
+        } else {
+          // Address is not private, so we will discard it
+          lanUrlForConfig = undefined;
+        }
+      }
+    } catch (_e) {
+      // ignored
+    }
+  } else {
+    prettyHost = host;
+  }
+  const localUrlForTerminal = formatUrl(prettyHost);
+  const localUrlForBrowser = formatUrl(prettyHost);
+  return {
+    lanUrlForConfig,
+    lanUrlForTerminal,
+    localUrlForTerminal,
+    localUrlForBrowser,
+  };
+}
 
 module.exports = async (ctx: Context) => {
   const platforms = ['browser', 'android', 'ios'] as const;
@@ -45,31 +90,19 @@ module.exports = async (ctx: Context) => {
     return;
   }
 
-  const webpackYargs = yargs(
-    yargsUnparser(
-      createArguments(is.object(pluginArgv.webpack) ? pluginArgv.webpack : {}),
-    ),
-  );
+  const webpackcli = new WebpackCLI()
 
-  const webpackArgv = webpackYargs
-    .options(options.webpack) // set webpack yargs options
-    .options(options.devServer) // set webpack-dev-server yargs options
-    .version(getVersion()).argv;
-
-  const [customWebpackConfig, customDevServerConfig] = await createConfig(
-    convertArgv(webpackArgv), // create webpack configuration from yargs.argv and webpack.config.js
-    webpackArgv,
-  );
+  const webpackConfigFromArgs = await webpackcli.loadConfig({ argv: pluginArgv.webpack })
+  const customWebpackConfig = webpackConfigFromArgs.options
+  const customDevServerConfig = customWebpackConfig.devServer ?? {}
 
   const protocol = customDevServerConfig.https ? 'https' : 'http';
   const host =
     !customDevServerConfig.host || customDevServerConfig.host === 'localhost'
       ? defaultHost
       : customDevServerConfig.host;
-  const port = await choosePort(
-    host,
-    customDevServerConfig.port || defaultPort,
-  );
+  const customPort = (typeof customDevServerConfig.port === 'string' ? parseInt(customDevServerConfig.port, 10) : customDevServerConfig.port)
+  const port = customPort || defaultPort
   if (!port) {
     return;
   }
@@ -98,37 +131,37 @@ module.exports = async (ctx: Context) => {
       ),
     ],
   };
+  const staticConfig = [{
+    directory: path.join(ctx.opts.projectRoot, 'www'),
+    publicPath: '/',
+    watch: true
+  }]
+
+  targetPlatforms.forEach((platform: string) => {
+    staticConfig.push({
+      directory: path.join(
+        ctx.opts.projectRoot,
+        'platforms',
+        platform,
+        'platform_www',
+      ),
+      publicPath: `/${platform}`,
+      watch: true
+    })
+  })
+
   const devServerConfig: WebpackDevServer.Configuration = {
-    contentBase: path.join(ctx.opts.projectRoot, 'www'),
     historyApiFallback: true,
-    watchContentBase: true,
     hot: true,
     ...customDevServerConfig,
+    static: staticConfig,
     host,
-    port,
-    before: (app, server, compiler) => {
-      if (customDevServerConfig.before) {
-        customDevServerConfig.before(app, server, compiler);
-      }
-      targetPlatforms.forEach((platform) => {
-        app.use(
-          `/${platform}`,
-          express.static(
-            path.join(
-              ctx.opts.projectRoot,
-              'platforms',
-              platform,
-              'platform_www',
-            ),
-          ),
-        );
-      });
-    },
+    port
   };
 
   // HMR
   if (devServerConfig.hot)
-    WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerConfig);
+    // WebpackDevServer.addDevServerEntrypoints(webpackConfig, devServerConfig);
 
   targetPlatforms.forEach((platform) => {
     if (platform === 'browser') {
@@ -175,7 +208,7 @@ module.exports = async (ctx: Context) => {
     });
   });
 
-  await new Promise((resolve, reject) => {
+  await new Promise<void>((resolve, reject) => {
     server.listen(port, host, (err) => {
       if (err) {
         reject(err);
